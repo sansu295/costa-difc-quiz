@@ -1,0 +1,19 @@
+<script src="questions.js"></script>
+<script>
+  // Pick the week here
+  const selectedWeek = "Week 1"; 
+  const quizData = masterQuizData[selectedWeek];
+
+  // Make sure you have the shuffle function here if you want it
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  // Shuffle the questions right after loading them
+  shuffleArray(quizData);
+
+  // ... rest of your existing quiz logic ...
+</script>
