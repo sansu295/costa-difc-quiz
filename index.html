@@ -136,6 +136,7 @@
           userName = nameInput;
           inviteCode = codeInput;
           incorrectDetails = []; // Reset list
+           shuffleArray(quizData);⁠
           document.getElementById('login-screen').classList.add('hidden');
           document.getElementById('quiz-screen').classList.remove('hidden');
           loadQuestion();
@@ -316,9 +317,7 @@
             [array[i], array[j]] = [array[j], array[i]];
         }
     }
-
-    // Shuffle the questions right after loading them
-    shuffleArray(quizData);
+    
 </script>
 </body>
 </html>
