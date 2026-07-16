@@ -1,1514 +1,302 @@
-const masterQuizData = {
-  "Week 1": [
-    {
-      q: "What is the correct extraction time for a standard double shot of espresso?",
-      a: ["15-20 seconds", "20-30 seconds", "30-40 seconds", "40-45 seconds"],
-      c: 1
-    },
-    {
-      q: "What is the standard yield (weight) in grams of a double shot of espresso?",
-      a: ["25g-30g", "36g-44g", "50g-60g", "15g-20g"],
-      c: 1
-    },
-    {
-      q: "Which coffee beverage is characterized by equal parts espresso, steamed milk, and milk foam?",
-      a: ["Caffè Latte", "Cappuccino", "Flat White", "Macchiato"],
-      c: 1
-    },
-    {
-      q: "What is the correct milk temperature range for a standard flat white or latte?",
-      a: ["50°C - 55°C", "60°C - 65°C", "70°C - 75°C", "80°C - 85°C"],
-      c: 1
-    },
-    {
-      q: "What is the standard espresso base for a Flat White?",
-      a: ["Double Espresso", "Double Ristretto", "Single Espresso", "Single Cortissimo"],
-      c: 1
-    },
-    {
-      q: "How many shots of espresso go into a standard Medium Caffè Latte?",
-      a: ["1 shot", "2 shots", "3 shots", "4 shots"],
-      c: 1
-    },
-    {
-      q: "What is the standard thickness of foam on a Caffè Latte?",
-      a: ["0.5 cm (approx. 1/4 inch)", "1 cm (approx. 1/2 inch)", "2 cm (approx. 3/4 inch)", "No foam"],
-      c: 0
-    },
-    {
-      q: "How many shots of espresso go into a standard Large Iced Latte?",
-      a: ["1 shot", "2 shots", "3 shots", "4 shots"],
-      c: 2
-    },
-    {
-      q: "What is the correct sequence of ingredients for a standard Caffè Mocha?",
-      a: ["Espresso, steamed milk, chocolate powder, whipped cream", "Chocolate powder/sauce, espresso, mix well, steamed milk, whipped cream", "Steamed milk, espresso, chocolate syrup on top", "Espresso, hot water, chocolate sauce"],
-      c: 1
-    },
-    {
-      q: "What type of milk is used as the default standard in our recipes unless requested otherwise?",
-      a: ["Skimmed (Skinny) Milk", "Semi-Skimmed Milk", "Whole (Full Fat) Milk", "Oat Milk"],
-      c: 2
-    },
-    {
-      q: "What is the primary difference between a Latte and a Cappuccino?",
-      a: ["Latte has more espresso than Cappuccino", "Cappuccino has a thicker layer of micro-foam (usually 1.5 cm) and is textured drier than a Latte", "Latte is served colder than Cappuccino", "There is no difference"],
-      c: 1
-    },
-    {
-      q: "How often should you purge and wipe the steam wand?",
-      a: ["Every hour", "After every single milk steaming cycle", "At the end of your shift", "Only when it looks dirty"],
-      c: 1
-    },
-    {
-      q: "What is the standard pour pattern for a Flat White?",
-      a: ["A dusting of chocolate powder", "A clean, white florette/circle of foam in the center with a brown crema ring", "A caramel drizzle grid", "A fully white top surface"],
-      c: 1
-    },
-    {
-      q: "What is the espresso shot requirement for a standard Cortado?",
-      a: ["Single Espresso", "Double Espresso", "Double Ristretto", "Single Ristretto"],
-      c: 2
-    },
-    {
-      q: "Which of the following is the correct definition of a 'Macchiato'?",
-      a: ["Espresso with steamed milk filled to the top", "Espresso marked with a small spoonful of dense milk foam", "A cold milk drink with espresso poured over the top", "A blend of chocolate and espresso"],
-      c: 1
-    },
-    {
-      q: "What is the correct weight of dry coffee grinds used for a standard double portafilter?",
-      a: ["14g - 16g", "17g - 19g", "20g - 22g", "24g - 26g"],
-      c: 1
-    },
-    {
-      q: "What is the ideal thickness of the crema layer on a perfect espresso shot?",
-      a: ["No crema is best", "1-2mm", "3-5mm", "Over 10mm"],
-      c: 2
-    },
-    {
-      q: "If an espresso shot runs too fast (e.g., under 15 seconds), how should you adjust the grinder?",
-      a: ["Make the grind coarser", "Make the grind finer", "Increase the water temperature", "Decrease the tamp pressure"],
-      c: 1
-    },
-    {
-      q: "If an espresso shot drips very slowly and takes over 40 seconds, how should you adjust the grinder?",
-      a: ["Make the grind coarser", "Make the grind finer", "Tamp much harder", "Add more dry coffee grounds"],
-      c: 0
-    },
-    {
-      q: "Why must we 'flush' the group head before inserting the portafilter for a new shot?",
-      a: ["To cool down the water", "To remove any leftover coffee oils or old grounds from the shower screen", "To increase water pressure", "To clean the drip tray"],
-      c: 1
-    },
-    {
-      q: "What is the shelf life of opened coffee beans in the hopper before they start to lose freshness?",
-      a: ["4 hours", "24 hours", "3 days", "1 week"],
-      c: 0
-    },
-    {
-      q: "What does 'under-extracted' espresso taste like?",
-      a: ["Sweet and smooth", "Sour, salty, thin, and lacking body", "Bitter, dry, and burnt", "Creamy and heavy"],
-      c: 1
-    },
-    {
-      q: "What does 'over-extracted' espresso taste like?",
-      a: ["Sour and bright", "Bitter, astringent, dry, and empty", "Very sweet and aromatic", "Salty and rich"],
-      c: 1
-    },
-    {
-      q: "What is the correct water temperature inside our espresso boilers?",
-      a: ["80°C - 85°C", "90°C - 95°C", "100°C - 105°C", "110°C - 115°C"],
-      c: 1
-    },
-    {
-      q: "How many shots of espresso go into a standard Medium Americano?",
-      a: ["1 shot", "2 shots", "3 shots", "4 shots"],
-      c: 2
-    },
-    {
-      q: "In what order do you prepare an Americano?",
-      a: ["Espresso first, then pour hot water over it", "Hot water first, then extract the espresso shots directly into/over the water", "Mix espresso and cold milk, then add water", "Water and espresso are brewed together"],
-      c: 1
-    },
-    {
-      q: "What is the standard cup size for a Flat White?",
-      a: ["4 oz", "8 oz", "12 oz", "16 oz"],
-      c: 1
-    },
-    {
-      q: "What is the standard cup size for an Espresso Macchiato?",
-      a: ["4 oz", "8 oz", "12 oz", "16 oz"],
-      c: 0
-    },
-    {
-      q: "What is the purpose of 'tamping' the coffee grounds?",
-      a: ["To clean the rim of the portafilter", "To pack the coffee grounds evenly to ensure uniform water extraction", "To measure the weight of the coffee", "To increase the temperature of the grounds"],
-      c: 1
-    },
-    {
-      q: "What force/pressure is generally recommended for an even tamp?",
-      a: ["5 kg", "15 kg", "30 kg", "50 kg"],
-      c: 1
-    },
-    {
-      q: "How do you check if your milk foam is 'micro-foam'?",
-      a: ["It has large, visible bubbles on top", "It looks like stiff egg whites", "It has a shiny, wet paint appearance with no visible bubbles", "It separates immediately into liquid and dry foam"],
-      c: 2
-    },
-    {
-      q: "Why must we never re-steam leftover milk?",
-      a: ["It ruins the texture, destroys sweetness, and risks bacterial growth", "It makes the milk too sweet", "It cools down too fast", "It takes too long to steam"],
-      c: 0
-    },
-    {
-      q: "What is the maximum safe holding temperature for cold milk in the fridge?",
-      a: ["4°C / 39°F", "8°C / 46°F", "10°C / 50°F", "12°C / 54°F"],
-      c: 0
-    },
-    {
-      q: "How should you clean a steam wand tip if the holes are blocked?",
-      a: ["Soak it in cold milk overnight", "Wipe it with a dry napkin", "Use a designated steam wand pin tool to clear the holes, then purge thoroughly", "Use a metal knife to pry the holes open"],
-      c: 2
-    },
-    {
-      q: "What is the correct way to store a milk jug when not in use?",
-      a: ["Upside down on a clean, sanitized jug rinser or wire rack", "Right side up on the counter with water inside", "Inside the fridge with milk left in it", "Under the espresso machine steam arm"],
-      c: 0
-    },
-    {
-      q: "What is the ideal water pressure (bars) for extracting espresso?",
-      a: ["3-4 bars", "9 bars", "15 bars", "20 bars"],
-      c: 1
-    },
-    {
-      q: "What does 'channeling' mean during extraction?",
-      a: ["Water finding the path of least resistance through cracks or weak spots in the coffee puck, leading to uneven extraction", "Changing the water channel on the machine", "The way we serve espresso in different channels", "Water flowing directly into the drip tray"],
-      c: 0
-    },
-    {
-      q: "Which of these factors does NOT affect grind calibration?",
-      a: ["Humidity in the air", "Temperature of the shop", "The brand of the paper cups", "Age of the roasted coffee beans"],
-      c: 2
-    },
-    {
-      q: "When steaming milk, at what temperature should you stop 'stretching' (injecting air) and start 'rolling'?",
-      a: ["At approximately 37°C / 100°F (hand warm)", "At 60°C / 140°F", "At 70°C / 158°F", "Right at the end of the steaming cycle"],
-      c: 0
-    },
-    {
-      q: "What is the correct recipe for a standard Babyccino?",
-      a: ["Single shot of espresso with milk foam", "Warm frothed milk with a light dusting of chocolate powder, served in a 4oz cup without espresso", "Warm water with milk foam", "Hot chocolate with whipped cream"],
-      c: 1
-    },
-    {
-      q: "How many shots of espresso are in a standard Small Americano?",
-      a: ["1 shot", "2 shots", "3 shots", "4 shots"],
-      c: 1
-    },
-    {
-      q: "What is the standard volume of a single espresso shot?",
-      a: ["10ml - 15ml", "25ml - 30ml", "45ml - 50ml", "60ml - 70ml"],
-      c: 1
-    },
-    {
-      q: "Which grind texture is appropriate for an espresso machine?",
-      a: ["Coarse like sea salt", "Medium like sand", "Fine like table salt / powdered sugar", "Extra coarse like gravel"],
-      c: 2
-    },
-    {
-      q: "What is the standard espresso base for a Cortissimo?",
-      a: ["Standard Double Espresso", "Single Ristretto", "A highly concentrated short extraction (15ml-20ml) shot of espresso", "Double Espresso Lungo"],
-      c: 2
-    },
-    {
-      q: "How many grams of coffee grinds are typically in a single portafilter basket?",
-      a: ["7g - 9g", "10g - 12g", "14g - 16g", "18g - 20g"],
-      c: 0
-    },
-    {
-      q: "What is the primary characteristic of a Ristretto shot?",
-      a: ["It has more water than a standard shot", "It uses the same amount of coffee but is extracted with half the water, making it sweeter and more concentrated", "It is extracted for 50 seconds", "It is served cold"],
-      c: 1
-    },
-    {
-      q: "What should you do if the crema on your espresso shots is pale, thin, and disappears quickly?",
-      a: ["Keep using the shot as normal", "Check if the beans are stale, adjust grind to be finer, or check if the extraction time is too fast", "Tamp lighter", "Add sugar to hold the crema"],
-      c: 1
-    },
-    {
-      q: "Why do we tap the milk jug gently on the counter after steaming?",
-      a: ["To wake up the customer", "To break any large surface bubbles and make the foam smooth and uniform", "To cool the milk down", "To mix the milk with the crema"],
-      c: 1
-    },
-    {
-      q: "What is the standard order of operations when preparing any milk-based espresso drink?",
-      a: ["Steam milk first, let it sit, grind and pull shots, pour", "Grind and dose coffee, start espresso extraction, steam milk during extraction, pour immediately once extraction finishes", "Pour cold milk into the cup, add shots, steam the whole cup", "Steam milk, pour into cup, extract espresso directly on top"],
-      c: 1
-    },
-    {
-      q: "What is the perfect appearance of dry coffee pucks after knocking them out?",
-      a: ["Wet and watery like mud", "Dry, solid, intact disks that hold their shape", "Powdery and loose like dry sand", "They should stick completely inside the basket"],
-      c: 1
-    }
-  ],
-  "Week 2": [
-    {
-      q: "Which of these ingredients is used in a standard Iced Caramel Macchiato?",
-      a: ["Chocolate sauce, whole milk, double espresso, caramel sauce", "Vanilla syrup, whole milk, ice, double espresso, caramel drizzle grid on top", "Caramel syrup, whipped cream, single espresso", "Condensed milk, whole milk, cinnamon powder"],
-      c: 1
-    },
-    {
-      q: "What is the correct order of assembly for a standard cold brew with cold foam?",
-      a: ["Ice, cold foam, cold brew coffee", "Cold brew coffee, ice, pour cold foam gently on top", "Cold foam, ice, cold brew coffee", "Cold brew and cold foam blended together with ice"],
-      c: 1
-    },
-    {
-      q: "How long should loose-leaf black tea be steeped for the perfect flavor balance?",
-      a: ["1 minute", "3 to 5 minutes", "10 minutes", "No limit, leave the bag in"],
-      c: 1
-    },
-    {
-      q: "How long should green tea be steeped to avoid bitterness?",
-      a: ["1 to 2 minutes", "2 to 3 minutes", "5 to 7 minutes", "10 minutes"],
-      c: 1
-    },
-    {
-      q: "What is the target water temperature for brewing delicate green or white teas?",
-      a: ["100°C / 212°F", "80°C to 85°C / 176°F to 185°F", "60°C / 140°F", "110°C / 230°F"],
-      c: 1
-    },
-    {
-      q: "What is the target water temperature for brewing robust black or herbal teas?",
-      a: ["70°C / 158°F", "80°C / 176°F", "95°C to 100°C / 203°F to 212°F", "120°C / 248°F"],
-      c: 2
-    },
-    {
-      q: "What is the base liquid used for our standard Frappés?",
-      a: ["Hot water", "Frappé liquid base, whole milk, and ice, blended together", "Skimmed milk and cold water only", "Yogurt and fruit juice"],
-      c: 1
-    },
-    {
-      q: "How do you prevent 'separation' in a freshly blended Frappé or Smoothie?",
-      a: ["Add more ice", "Use the correct amount of emulsifying Frappé base/binder and blend on the correct programmed cycle", "Stir it with a spoon after pouring", "Serve it without ice"],
-      c: 1
-    },
-    {
-      q: "What is the standard recipe for preparing a standard Fruit Smoothie?",
-      a: ["Fresh fruit and hot water", "Fruit smoothie puree/mix to the line, ice, and water/milk, blended on the designated cycle", "Fruit syrup and whipped cream", "Powder mix and espresso shots"],
-      c: 1
-    },
-    {
-      q: "How many pumps of syrup go into a standard Medium Iced flavored Latte?",
-      a: ["2 pumps", "3 pumps", "4 pumps", "5 pumps"],
-      c: 1
-    },
-    {
-      q: "What is the standard recipe for an Iced Latte?",
-      a: ["Espresso, steamed milk, ice cubes", "Fill cup with ice, add cold milk, pour fresh espresso shots over the top, and stir", "Espresso, cold water, ice, milk foam", "Blended milk and ice with coffee powder"],
-      c: 1
-    },
-    {
-      q: "When preparing an Iced Americano, what should you put in the cup first?",
-      a: ["The hot espresso shots", "Cold water and ice, then pour the espresso shots over them to preserve crema and flavor", "The paper straw", "The lid"],
-      c: 1
-    },
-    {
-      q: "What is the correct recipe for a standard Hot Chocolate?",
-      a: ["Steamed milk and hot water", "Chocolate powder dissolved in a small amount of hot water, topped with perfectly steamed, velvety milk", "Espresso and chocolate syrup", "Cold milk and chocolate powder shaken together"],
-      c: 1
-    },
-    {
-      q: "What is the difference between a Hot Chocolate and a Caffè Mocha?",
-      a: ["Hot Chocolate has espresso; Mocha does not", "Mocha contains espresso shots mixed with chocolate and steamed milk; Hot Chocolate contains no espresso", "Mocha is colder than Hot Chocolate", "There is no difference"],
-      c: 1
-    },
-    {
-      q: "What is the correct procedure for measuring ingredients for a blended beverage?",
-      a: ["Guess the amounts directly in the blender jar", "Always use the graduated measuring lines on the specific blender cup/jug for accuracy and consistency", "Fill the blender jar to the top", "Use a coffee cup to measure"],
-      c: 1
-    },
-    {
-      q: "What is the ideal texture of a perfectly blended Frappé?",
-      a: ["Chunky with large pieces of ice", "Smooth, thick, and pourable, with no visible ice chunks or separation", "Thin and watery like milk", "Foamy and dry"],
-      c: 1
-    },
-    {
-      q: "How should you clean the blender jars between making different blended drinks?",
-      a: ["Wipe them with a dry cloth", "Rinse thoroughly on the rapid jar-rinser station with clean water", "Wash with chemical sanitizer every time", "No rinse is needed unless it was a peanut product"],
-      c: 1
-    },
-    {
-      q: "What is the standard shelf life of prepared whipped cream canisters in the fridge?",
-      a: ["12 hours", "24 hours", "48 hours", "1 week"],
-      c: 1
-    },
-    {
-      q: "What gas cartridge is used to charge our whipped cream dispensers?",
-      a: ["Carbon Dioxide (CO2)", "Nitrogen (N2)", "Nitrous Oxide (N2O)", "Oxygen (O2)"],
-      c: 2
-    },
-    {
-      q: "What gas cartridge is used to charge our Nitro Cold Brew kegs/dispensers?",
-      a: ["Carbon Dioxide (CO2)", "Pure Nitrogen (N2) or compressed air", "Nitrous Oxide (N2O)", "Helium (He)"],
-      c: 1
-    },
-    {
-      q: "How many times should you shake a whipped cream canister after charging it with a charger?",
-      a: ["Do not shake", "2-3 times", "10-15 times vigorously", "Over 50 times"],
-      c: 2
-    },
-    {
-      q: "What is the standard brewing/steeping time for cold brew coffee?",
-      a: ["4 hours", "12 hours", "14 to 20 hours (typically 16 hours at room temp or 20 hours in fridge)", "48 hours"],
-      c: 2
-    },
-    {
-      q: "What type of coffee grind is used for brewing Cold Brew?",
-      a: ["Coarse (like sea salt or breadcrumbs) to prevent over-extraction and cloudy filtering", "Fine (like espresso)", "Medium (like table salt)", "Powdered"],
-      c: 0
-    },
-    {
-      q: "How should brewed Cold Brew concentrate be stored?",
-      a: ["In a sealed container in the walk-in fridge", "On the counter at room temperature", "In the freezer", "Under the espresso machine"],
-      c: 0
-    },
-    {
-      q: "What is the standard dilution ratio of cold brew concentrate to water/milk for a standard serving?",
-      a: ["1:1 ratio (equal parts concentrate and water/milk) with ice", "1:5 ratio (mostly water)", "Undiluted concentrate only", "1:10 ratio"],
-      c: 0
-    },
-    {
-      q: "When preparing an Iced Matcha Latte, how should the matcha powder be dissolved?",
-      a: ["Stirred directly into cold milk with a spoon", "Whisked with a small amount of hot water (or warm milk) first to create a smooth, clump-free paste before adding cold milk and ice", "Shaken dry in the cup", "Blended in the blender at high speed"],
-      c: 1
-    },
-    {
-      q: "What is the standard recipe for an Iced Flat White?",
-      a: ["Double standard espresso, cold milk, and ice", "Double Ristretto shots extracted over cold milk and ice, with a small layer of cold-frothed micro-foam on top", "Single espresso blended with milk and ice", "Steamed milk poured over ice and espresso"],
-      c: 1
-    },
-    {
-      q: "Which of these ingredients is NOT used in our standard Iced Mocha?",
-      a: ["Espresso shots", "Chocolate powder or syrup", "Cold milk", "Lemon slice"],
-      c: 3
-    },
-    {
-      q: "What is the correct way to layer an Iced Macchiato?",
-      a: ["Milk first, then espresso, then ice", "Ice and cold milk first, then pour espresso slowly over the top to create a distinct dark-on-light layered look", "Espresso first, then ice, then milk", "Blended together"],
-      c: 1
-    },
-    {
-      q: "Why do we use specific colored scoops for ice?",
-      a: ["For decoration", "To prevent cross-contamination between different stations (e.g., bar ice vs BOH ice)", "They are cheaper to buy", "To measure the exact weight of the ice"],
-      c: 1
-    },
-    {
-      q: "What is the correct procedure for making a standard Iced Tea?",
-      a: ["Mix hot tea with cold milk", "Brew concentrated tea, sweeten if needed, dilute with cold water and pour over a full cup of ice, garnished with fresh lemon/mint", "Blend tea leaves with ice and sugar", "Use bottled iced tea only"],
-      c: 1
-    },
-    {
-      q: "Which blended beverage contains a shot of espresso as standard?",
-      a: ["Mango Smoothie", "Strawberry Frappé", "Espresso Frappé / Coffee Frappé", "Vanilla Frappé"],
-      c: 2
-    },
-    {
-      q: "What is the standard thickness of hot chocolate foam?",
-      a: ["No foam", "0.5 cm (velvety micro-foam, similar to Latte)", "3 cm (dry, dense foam)", "It should be 100% foam"],
-      c: 1
-    },
-    {
-      q: "What is the correct recipe for a Chai Latte?",
-      a: ["Chai syrup or powder dissolved in hot water only", "Chai syrup or powder steamed together with milk to create a rich, spiced, micro-foamed beverage", "Black tea bag with cold milk", "Espresso shot with cinnamon powder"],
-      c: 1
-    },
-    {
-      q: "Does a standard Chai Latte contain espresso?",
-      a: ["Yes, 2 shots", "No, it is a spiced tea and milk beverage (unless a 'Dirty Chai' is requested, which adds a shot of espresso)", "Yes, 1 shot", "Yes, but only in the Large size"],
-      c: 1
-    },
-    {
-      q: "How many grams of chocolate powder are used for a standard Medium Hot Chocolate?",
-      a: ["10g", "25g - 30g", "50g", "100g"],
-      c: 1
-    },
-    {
-      q: "What is the correct temperature for the water used to wash smoothie and frappé blender pitchers?",
-      a: ["Cold water only", "Warm/hot water with approved sanitizing solution", "Boiling water (100°C)", "Ice water"],
-      c: 1
-    },
-    {
-      q: "How many pumps of sauce go into a standard Large Frappé?",
-      a: ["2 pumps", "3 pumps", "4 pumps", "6 pumps"],
-      c: 2
-    },
-    {
-      q: "What is the standard holding time for fresh mint leaves used in iced drinks?",
-      a: ["12 hours", "24 hours (end of day)", "3 days", "1 week"],
-      c: 1
-    },
-    {
-      q: "What should you do if a smoothie turns out too thin and watery?",
-      a: ["Pour it back into the blender, add the correct measured amount of ice/fruit puree, and re-blend", "Serve it anyway", "Add hot water to balance it", "Stir in whipped cream to thicken it"],
-      c: 0
-    },
-    {
-      q: "Which of these is a classic garnish for our standard Strawberry Frappé?",
-      a: ["Chocolate drizzle", "Whipped cream and strawberry sauce drizzle", "Lemon slice", "Cinnamon dusting"],
-      c: 1
-    },
-    {
-      q: "What is the correct method for preparing a standard Iced Flat White?",
-      a: ["Extract 2 standard espresso shots, pour cold milk over ice, and add the shots on top", "Extract 2 Ristretto shots directly over ice, add cold milk, and top with cold micro-foam", "Blend espresso, milk, and ice together", "Steam milk first, then pour over ice and espresso"],
-      c: 1
-    },
-    {
-      q: "How should you store fresh lemon slices used for iced tea garnishes?",
-      a: ["On the counter at room temperature", "In a clean, covered container inside the under-counter fridge, day-dotted", "In the freezer", "Under the espresso machine drip tray"],
-      c: 1
-    },
-    {
-      q: "What is the standard shelf life of an unopened bottle of fruit smoothie puree?",
-      a: ["1 week", "1 month", "Check the manufacturer's expiration date printed on the bottle", "1 year"],
-      c: 2
-    },
-    {
-      q: "What is the shelf life of an *opened* bottle of fruit smoothie puree kept in the fridge?",
-      a: ["24 hours", "7 to 14 days (or as per manufacturer guidelines, typically 7 days dotted)", "30 days", "6 months"],
-      c: 1
-    },
-    {
-      q: "What is the correct procedure if a customer asks for an iced drink without ice?",
-      a: ["Refuse the order", "Explain that the recipe requires ice for volume and temperature, but accommodate by using chilled milk and filling to the standard recipe line", "Charge them double", "Fill the rest of the cup with hot water"],
-      c: 1
-    },
-    {
-      q: "Which blender speed cycle is typically programmed for smoothies?",
-      a: ["High speed continuous (Cycle 4)", "Variable speed pulse/programmed smoothie cycle (typically Cycle 2 or 3 depending on equipment)", "Low speed only (Cycle 1)", "Manual pulsing for 2 minutes"],
-      c: 1
-    },
-    {
-      q: "What is the risk of blending a beverage for too long?",
-      a: ["It makes the drink too hot", "The ice melts completely, making the drink thin, watery, and warm", "It increases the caffeine content", "It ruins the blender motor immediately"],
-      c: 1
-    },
-    {
-      q: "What must you do before pouring a blended smoothie into the serving cup?",
-      a: ["Tap the blender jar to settle any bubbles, and check for any unblended ice chunks", "Stir it with a dirty spoon", "Add hot water", "Strain it through a coffee filter"],
-      c: 0
-    },
-    {
-      q: "What is the standard garnish for a Caramel Frappé?",
-      a: ["Chocolate flakes", "Whipped cream and caramel sauce drizzle grid", "Fresh mint leaves", "Cinnamon powder"],
-      c: 1
-    }
-  ],
-  "Week 3": [
-    {
-      q: "What is the correct oven temperature for baking pre-proved frozen croissants?",
-      a: ["150°C / 302°F", "170°C to 180°C / 338°F to 356°F", "200°C / 392°F", "220°C / 428°F"],
-      c: 1
-    },
-    {
-      q: "How long is the standard baking time for frozen butter croissants?",
-      a: ["5-8 minutes", "15-18 minutes", "25-30 minutes", "40 minutes"],
-      c: 1
-    },
-    {
-      q: "How long must baked pastries cool down on the tray before they can be served or placed in the display case?",
-      a: ["No cooling needed, serve immediately", "5 minutes", "15 to 20 minutes (to allow the structure to set and pastry to become crispy)", "1 hour"],
-      c: 2
-    },
-    {
-      q: "What is the maximum holding time for freshly baked croissants in our display case before they must be wasted?",
-      a: ["4 hours", "12 hours (or end of day/shift)", "24 hours", "48 hours"],
-      c: 1
-    },
-    {
-      q: "What is the correct procedure for defrosting frozen savory items (like toasties or paninis)?",
-      a: ["Leave them on the counter at room temperature overnight", "Defrost them slowly inside the walk-in fridge (chiller) at 1°C to 4°C for 12-24 hours", "Microwave them on high power for 5 minutes", "Bake them straight from frozen at high temperature"],
-      c: 1
-    },
-    {
-      q: "What is the shelf life of defrosted toasties kept in the display fridge?",
-      a: ["24 hours (1 day)", "48 hours (2 days)", "72 hours (3 days)", "5 days"],
-      c: 1
-    },
-    {
-      q: "What is the target core temperature when heating a savory panini or toastie for a customer?",
-      a: ["50°C / 122°F", "63°C / 145°F", "75°C / 167°F or above", "100°C / 212°F"],
-      c: 2
-    },
-    {
-      q: "Which heating equipment is used to toast paninis and toasties to ensure a crispy texture and hot center?",
-      a: ["Standard Microwave", "High-speed combination oven (Merrychef/TurboChef) or Contact Grill", "Convection Baking Oven", "Hot holding cabinet"],
-      c: 1
-    },
-    {
-      q: "What is the correct way to handle food items when placing them in the display case?",
-      a: ["Use your bare hands", "Always use clean tongs, bakery tissue, or disposable gloves", "Use a cleaning cloth", "Let the customer grab them directly"],
-      c: 1
-    },
-    {
-      q: "How should sweet pastries and savory items be arranged in the display case?",
-      a: ["Mixed together on the same tray", "Clearly separated into designated sweet and savory zones to prevent cross-contamination and flavor transfer", "Stacked on top of each other", "By color only"],
-      c: 1
-    },
-    {
-      q: "What is the correct procedure if a customer asks for a gluten-free item?",
-      a: ["Suggest a standard croissant and tell them it has low gluten", "Serve a pre-packaged gluten-free item in its original sealed wrap to prevent cross-contamination on the bar", "Wipe a standard plate and serve a loose cake", "Tell them we don't serve gluten-free items"],
-      c: 1
-    },
-    {
-      q: "Why must we use a baking sheet/parchment paper when heating toasties in the high-speed oven?",
-      a: ["To make the oven look nice", "To prevent cheese/grease from sticking to the oven plates, reducing smoke, fire risks, and flavor cross-contamination", "To slow down the cooking process", "To make the food taste sweeter"],
-      c: 1
-    },
-    {
-      q: "What is the shelf life of opened muffin boxes kept in the back of house?",
-      a: ["24 hours", "48 hours", "72 hours (if kept sealed/airtight to prevent drying out)", "1 week"],
-      c: 2
-    },
-    {
-      q: "What is the correct display rotation rule for food products?",
-      a: ["LIFO (Last In, First Out)", "FIFO (First In, First Out) - older stock with shorter shelf life sold first", "FILO (First In, Last Out)", "Random rotation"],
-      c: 1
-    },
-    {
-      q: "How often should you check the temperature of the food display fridge?",
-      a: ["Once a day", "At least 3 times a day (Opening, Mid-day, Closing) and record in the food safety log", "Only when it feels warm", "Once a week"],
-      c: 1
-    },
-    {
-      q: "What is the legal maximum temperature for a chilled food display unit?",
-      a: ["4°C / 39°F", "8°C / 46°F", "10°C / 50°F", "15°C / 59°F"],
-      c: 1
-    },
-    {
-      q: "What should you do if the display fridge temperature reads 10°C?",
-      a: ["Ignore it unless it reaches 15°C", "Report it immediately to the Store Manager, check if the door was left open, and monitor; if it stays high, move food to a working fridge", "Turn the fridge off and on again", "Put ice cubes on the shelves"],
-      c: 1
-    },
-    {
-      q: "How should you present a heated panini to a customer dining in?",
-      a: ["In a paper bag", "On a clean, pre-warmed ceramic plate with a napkin and appropriate clean cutlery, served toasted side up", "Directly on the wooden table", "On a baking sheet only"],
-      c: 1
-    },
-    {
-      q: "What is the standard procedure for handling unsold display food at the end of the night?",
-      a: ["Leave it in the display case for tomorrow morning", "Record all expired/unsold items on the waste log, discard them, and thoroughly clean the display shelves", "Take it home without logging it", "Give it to regular customers for free without logging"],
-      c: 1
-    },
-    {
-      q: "Why do we keep food allergen information booklets near the till/display area?",
-      a: ["Because it is a legal requirement and essential for customer safety to verify ingredients upon request", "To show customers pictures of the food", "To help staff memorize the prices", "To use as decoration"],
-      c: 0
-    },
-    {
-      q: "What is the maximum holding time for pre-packed sandwiches after delivery (if kept refrigerated)?",
-      a: ["12 hours", "24 hours", "Use by the printed expiration date on the label (typically 48-72 hours)", "5 days"],
-      c: 2
-    },
-    {
-      q: "When baking frozen pastries, why must we leave space between them on the baking tray?",
-      a: ["To make them easier to count", "To allow even heat circulation and expansion of the pastry layers during baking", "To save baking paper", "To make them bake slower"],
-      c: 1
-    },
-    {
-      q: "What is the correct way to handle a cookie when serving it to a customer?",
-      a: ["Hold it with bare hands", "Use clean cookie tongs or bakery paper to place it in a cookie bag or plate", "Slide it across the counter", "Hand it over in your gloved hand after cleaning the bar"],
-      c: 1
-    },
-    {
-      q: "How long should a heated toastie rest before serving it to a customer?",
-      a: ["Do not rest, serve immediately when boiling hot", "Approx. 1 minute (allows cheese to settle and prevents burns)", "5 minutes", "10 minutes"],
-      c: 1
-    },
-    {
-      q: "What is the correct storage method for back-up cakes in the walk-in freezer?",
-      a: ["Unwrapped on the shelves", "Stored in their original boxes, fully sealed, labeled with receipt/delivery dates", "Next to the chemical bottles", "In plastic bags on the floor"],
-      c: 1
-    },
-    {
-      q: "What is the correct baking setting for a standard Butter Croissant in the combination oven?",
-      a: ["Setting 1 (High steam, high heat)", "Setting 2 (Convection baking, medium fan speed, no steam)", "Setting 5 (Maximum microwave power)", "Setting 10 (Grill only)"],
-      c: 1
-    },
-    {
-      q: "What color cutting board should be used for slicing sweet cakes or muffins?",
-      a: ["Yellow (Cooked Meats)", "Red (Raw Meat)", "White (Bakery and Dairy)", "Green (Salad and Fruit)"],
-      c: 2
-    },
-    {
-      q: "What color cutting board should be used for slicing fresh salad ingredients or tomatoes for sandwiches?",
-      a: ["White", "Green", "Yellow", "Brown"],
-      c: 1
-    },
-    {
-      q: "If a panini contains raw/unpasteurized ingredients, what must you do before serving?",
-      a: ["Serve it cold", "Ensure it is heated thoroughly to the required core temperature (75°C) to eliminate pathogens", "Wipe it with a cloth", "Only toast it for 5 seconds"],
-      c: 1
-    },
-    {
-      q: "How should the cake display cabinet glass be cleaned?",
-      a: ["With soapy water and a sponge during service", "Sprayed with glass cleaner on a microfiber cloth (sprayed away from food) when empty, polished dry", "Wiped with a damp general-purpose bar cloth", "It should not be cleaned"],
-      c: 1
-    },
-    {
-      q: "What is the correct sequence of action when a customer orders a heated sandwich?",
-      a: ["Take payment, place sandwich in oven, prepare drink, retrieve sandwich, serve together", "Place sandwich in oven, take payment, make drink, serve sandwich cold", "Make drink, serve drink, then heat sandwich", "Serve sandwich frozen, let them heat it at home"],
-      c: 0
-    },
-    {
-      q: "Why must we never use a wet tray for baking pastries?",
-      a: ["It causes the pastry bottoms to become soggy, stick, and boil instead of bake crispy", "It ruins the oven racks", "It makes the baking paper catch fire", "It changes the color of the tray"],
-      c: 0
-    },
-    {
-      q: "What is the holding time for defrosted slicing cakes (like Carrot Cake or Cheesecake) in the chilled display?",
-      a: ["24 hours", "48 hours", "3 days (72 hours) or as per brand spec sheet, day-dotted", "1 week"],
-      c: 2
-    },
-    {
-      q: "What should you do if a food item falls on the floor?",
-      a: ["Wipe it off and place it back in the display case", "Discard it immediately, log it as waste, and wash your hands", "Serve it only if heated afterward", "Give it to a pet"],
-      c: 1
-    },
-    {
-      q: "How should you store fresh fruit (like bananas or apples) used for displays or smoothies?",
-      a: ["In a sealed plastic box in the freezer", "In clean, well-ventilated baskets, checked daily for mold or over-ripeness", "In the chemical cupboard", "In the dishwasher"],
-      c: 1
-    },
-    {
-      q: "What is the correct heating program for a standard ham and cheese toastie in the Merrychef oven?",
-      a: ["30 seconds microwave only", "The designated 'Toastie' program (combining microwave power and convection heat for approx. 45-60 seconds)", "5 minutes convection bake", "10 seconds toast"],
-      c: 1
-    },
-    {
-      q: "Why must we avoid stacking pastries too high in the display cabinet?",
-      a: ["It blocks the cold air circulation and can cause items to squash or look unappealing", "It makes them look too expensive", "It makes them dry out faster", "It slows down the customer's choice"],
-      c: 0
-    },
-    {
-      q: "What is the holding time for freshly baked cookies in the display case?",
-      a: ["4 hours", "24 hours (end of day)", "48 hours", "3 days"],
-      c: 1
-    },
-    {
-      q: "How often should food tongs be replaced or sanitized during a shift?",
-      a: ["Once at the end of the day", "Every 4 hours (minimum) or immediately if dropped/cross-contaminated", "Once a week", "Every hour"],
-      c: 1
-    },
-    {
-      q: "What should you do if you notice mold on a single berry in a fruit container?",
-      a: ["Throw away only the molded berry and use the rest", "Discard the entire container to prevent microscopic mold spore contamination, log as waste", "Wash the molded berry and use it as garnish", "Put the container in the freezer to kill the mold"],
-      c: 1
-    },
-    {
-      q: "What is the correct temperature for the walk-in freezer?",
-      a: ["0°C to -4°C", "-18°C or colder", "-10°C to -12°C", "4°C"],
-      c: 1
-    },
-    {
-      q: "How should we label food containers that we prep ourselves (e.g., sliced cheese)?",
-      a: ["With a price tag", "With a 'Day Dot' containing: product name, prep date, prep time, expiry date, and initials", "With our name only", "We don't need to label them"],
-      c: 1
-    },
-    {
-      q: "What is the maximum time a high-risk food (like chicken or dairy) can be left in the 'Danger Zone' (5°C to 63°C)?",
-      a: ["30 minutes", "1 hour", "2 hours", "4 hours"],
-      c: 2
-    },
-    {
-      q: "Which of these is considered a 'high-risk' food in our cafe?",
-      a: ["Granulated sugar", "Coffee beans", "Tuna mayonnaise sandwich", "Paper cups"],
-      c: 2
-    },
-    {
-      q: "What should you do if a customer returns a heated panini claiming the inside is still frozen?",
-      a: ["Tell them to wait for it to melt", "Apologize, discard the cold panini, check that you used the correct oven program, prepare a fresh one heated to a safe core temperature, and log the waste", "Put the same panini back in the oven for 2 minutes", "Suggest they eat a cookie instead"],
-      c: 1
-    },
-    {
-      q: "How do you clean the panini grill plates safely?",
-      a: ["Pour cold water directly onto the hot plates", "Let plates cool down slightly, scrape residues with a wire grill brush, wipe with damp cloth, and apply a thin layer of cooking oil", "Spray with heavy bleach while hot", "Use a metal scraper while the unit is at full temperature"],
-      c: 1
-    },
-    {
-      q: "What is the standard weight of a pastry portion (like a slice of cake)?",
-      a: ["50g", "Approx. 100g - 120g (according to brand specifications)", "200g", "Whatever looks biggest"],
-      c: 1
-    },
-    {
-      q: "Why do we use specific non-stick liners inside combination ovens?",
-      a: ["To make the oven look colorful", "To protect the oven surfaces, prevent food sticking, and make daily cleaning quick and effective without scratching the metal", "To cook the food twice as fast", "To keep the food warm after cooking"],
-      c: 1
-    },
-    {
-      q: "What is the proper way to defrost a frozen cake?",
-      a: ["Leave it on the heated counter", "Place it in the chiller fridge overnight (12-24 hours) in its original packaging", "Put it in the oven at 50°C", "Soak the box in warm water"],
-      c: 1
-    },
-    {
-      q: "Which of these is NOT a step in the daily closing food safety check?",
-      a: ["Recording final fridge temperatures", "Discarding expired food and logging waste", "Cleaning and sanitizing all food contact surfaces", "Counting the cash drawer money"],
-      c: 3
-    }
-  ],
-  "Week 4": [
-    {
-      q: "What is the maximum legal temperature for a chilled under-counter food display fridge?",
-      a: ["4°C / 39°F", "8°C / 46°F", "10°C / 50°F", "12°C / 54°F"],
-      c: 1
-    },
-    {
-      q: "What is the recommended target operating temperature for our chilled food display fridges?",
-      a: ["0°C to 2°C", "1°C to 5°C", "5°C to 8°C", "8°C to 12°C"],
-      c: 1
-    },
-    {
-      q: "How often must you record the temperatures of all fridges and freezers on the daily food safety log?",
-      a: ["Once a day", "Twice a day (minimum)", "Three times a day", "Every hour"],
-      c: 2
-    },
-    {
-      q: "What is the minimum temperature that hot-holding food (like toasties or paninis) must reach when heated?",
-      a: ["63°C / 145°F", "70°C / 158°F", "75°C / 167°F", "82°C / 180°F"],
-      c: 2
-    },
-    {
-      q: "Once heated and placed in a hot-holding unit, food must be kept at or above:",
-      a: ["55°C / 131°F", "60°C / 140°F", "63°C / 145°F", "70°C / 158°F"],
-      c: 2
-    },
-    {
-      q: "If hot-held food drops below 63°C, it must be discarded after a maximum of:",
-      a: ["30 minutes", "1 hour", "2 hours", "4 hours"],
-      c: 2
-    },
-    {
-      q: "Which color-coded chopping board must be used for slicing fresh tomatoes or lettuce?",
-      a: ["Yellow", "Red", "Green", "White"],
-      c: 2
-    },
-    {
-      q: "Which color-coded chopping board is designated for slicing bakery items or bread?",
-      a: ["White", "Yellow", "Brown", "Blue"],
-      c: 0
-    },
-    {
-      q: "To prevent cross-contamination, you must wash and sanitize your hands for at least:",
-      a: ["5 seconds", "10 seconds", "20 seconds", "1 minute"],
-      c: 2
-    },
-    {
-      q: "Which of these is NOT an acceptable reason to wash your hands immediately?",
-      a: ["After clearing dirty tables", "After touching your hair or face", "After taking a clean cup from the shelf", "After handling cash or the POS screen"],
-      c: 2
-    },
-    {
-      q: "What is the correct procedure if a customer states they have a severe peanut allergy?",
-      a: ["Assure them we use separate jugs", "Politely explain we cannot guarantee an allergen-free environment due to open bar operations", "Suggest they try a gluten-free item instead", "Wipe down the steam wand with a clean blue roll and make the drink"],
-      c: 1
-    },
-    {
-      q: "How must alternative milks (Oat, Coconut, Soya, Almond) be stored in the fridge?",
-      a: ["Mixed with dairy milks on any shelf", "On a shelf below dairy milks to prevent drips", "Clearly separated, ideally on a dedicated shelf/section", "In the freezer"],
-      c: 2
-    },
-    {
-      q: "What is the standard procedure for cleaning a steam wand after steaming an alternative milk?",
-      a: ["Purge and wipe with the general dairy milk cloth", "Wipe with a designated, color-coded allergen cloth, then purge", "Wipe with a dry blue roll only", "No special action is needed if we purge it"],
-      c: 1
-    },
-    {
-      q: "When a customer requests an allergen information booklet, where should you find it?",
-      a: ["Look it up on your personal phone", "Direct them to the printed Allergen Guide kept at the till point", "Guess based on the ingredient label", "Tell them we don't keep one in store"],
-      c: 1
-    },
-    {
-      q: "What color cloth is typically designated for cleaning steam wands used for dairy milk?",
-      a: ["Red", "Blue", "Yellow", "Green"],
-      c: 2
-    },
-    {
-      q: "What color cloth is typically designated for general front-counter sanitizing?",
-      a: ["Red", "Blue", "Yellow", "Green"],
-      c: 1
-    },
-    {
-      q: "How often should sanitizing cloth buckets be changed to ensure the chemical remains effective?",
-      a: ["Once a shift", "Every 2 hours", "Every 4 hours", "Only when the water looks dirty"],
-      c: 1
-    },
-    {
-      q: "What chemical is used to clean and backflush the group heads on our espresso machines?",
-      a: ["General dish soap", "Puly Caff / Espresso machine cleaning powder", "Bleach", "Sanitizer spray"],
-      c: 1
-    },
-    {
-      q: "During the nightly backflushing process, how long should the cleaning cycle run?",
-      a: ["5 seconds", "5 cycles of 10 seconds on / 10 seconds off", "1 continuous minute", "10 minutes"],
-      c: 1
-    },
-    {
-      q: "What must you do to the group heads immediately after backflushing with cleaning chemical?",
-      a: ["Wipe with a cloth and start making coffee", "Perform a thorough rinse cycle with clean water to remove chemical residue", "Turn off the machine immediately", "Leave the group handles out overnight"],
-      c: 1
-    },
-    {
-      q: "Which cleaning tool should be used to scrub the gaskets inside the group heads daily?",
-      a: ["A metal scraper", "A group head brush", "A standard green scouring pad", "A butter knife"],
-      c: 1
-    },
-    {
-      q: "The steam wand tip should be removed and soaked in what solution during the deep weekly clean?",
-      a: ["Pure bleach", "Hot water and Puly Milk / steam wand cleaner", "Cold soapy water", "Ice water"],
-      c: 1
-    },
-    {
-      q: "How often should the ice machine be fully emptied, cleaned, and sanitized?",
-      a: ["Daily", "Weekly", "Monthly", "Quarterly"],
-      c: 2
-    },
-    {
-      q: "If you notice a pest (like a cockroach or mouse) in the store, what is the immediate action?",
-      a: ["Try to catch it yourself", "Ignore it unless a customer sees it", "Report it immediately to the Store Manager and log it for pest control", "Spray chemical insecticide near the food displays"],
-      c: 2
-    },
-    {
-      q: "Where should pest control bait stations be located in the store?",
-      a: ["On food preparation counters", "Under counters and near exit points, as mapped by the contractor", "Inside the display fridges", "In the staff locker room only"],
-      c: 1
-    },
-    {
-      q: "What is the correct storage method for cleaning chemicals (like sanitizer and bleach)?",
-      a: ["On the bottom shelf of the dry food store", "In a designated chemical cupboard away from any food storage", "Under the espresso machine next to the milk", "In the back-of-house sink"],
-      c: 1
-    },
-    {
-      q: "True or False: You can store personal food or drinks in the store's food display or backup fridges.",
-      a: ["True", "False"],
-      c: 1
-    },
-    {
-      q: "What is the maximum holding time for pre-prepped sandwich items once removed from their original sealed packaging?",
-      a: ["12 hours", "24 hours", "48 hours", "72 hours"],
-      c: 1
-    },
-    {
-      q: "When must the bakery display cases (containing cookies, muffins, and croissants) be cleaned?",
-      a: ["Once a week", "Daily, at the end of the night", "Only when crumbs are visible", "Every 2 hours"],
-      c: 1
-    },
-    {
-      q: "If you cut your finger while working on the bar, what must you apply before returning to work?",
-      a: ["A standard skin-colored plaster", "A bright blue, waterproof plaster", "A piece of paper towel and tape", "Nothing, just wash your hands"],
-      c: 1
-    },
-    {
-      q: "Why are blue plasters used in food preparation environments?",
-      a: ["They heal cuts faster", "They are highly visible and contain a metal strip detectable by food manufacturing scanners", "They match the Costa brand colors", "They are cheaper to purchase"],
-      c: 1
-    },
-    {
-      q: "What jewelry is a barista permitted to wear while working on the bar?",
-      a: ["A watch and a wedding band", "A plain wedding band (no stones) only", "Any rings, as long as they wear gloves", "Earrings and necklaces are fine, but no rings"],
-      c: 1
-    },
-    {
-      q: "How must hair be kept if it is longer than shoulder-length?",
-      a: ["Left down as long as it is clean", "Tied back securely and/or kept under a hairnet/cap", "Tucked into the collar of the polo shirt", "Sprayed with hairspray"],
-      c: 1
-    },
-    {
-      q: "What is the 'Danger Zone' temperature range where bacteria multiply most rapidly?",
-      a: ["-18°C to 0°C", "0°C to 4°C", "5°C to 63°C", "64°C to 100°C"],
-      c: 2
-    },
-    {
-      q: "How long can high-risk food safely remain in the 'Danger Zone' before it must be discarded?",
-      a: ["30 minutes", "1 hour", "2 hours", "4 hours"],
-      c: 2
-    },
-    {
-      q: "When receiving a delivery of frozen pastries, what temperature should the delivery vehicle's freezer be?",
-      a: ["0°C or below", "-12°C or below", "-18°C or below", "-25°C or below"],
-      c: 2
-    },
-    {
-      q: "What does the abbreviation 'FIFO' stand for in inventory rotation?",
-      a: ["First In, Fast Out", "First In, First Out", "Fast Ice, Fresh Only", "Food Inspection, Food Order"],
-      c: 1
-    },
-    {
-      q: "What color mop head must be used to clean the customer toilets?",
-      a: ["Red", "Blue", "Green", "Yellow"],
-      c: 0
-    },
-    {
-      q: "What color mop head must be used to clean the kitchen / back-of-house area?",
-      a: ["Red", "Blue", "Green", "Yellow"],
-      c: 3
-    },
-    {
-      q: "What color mop head must be used to clean the front-of-house seating area?",
-      a: ["Red", "Blue", "Green", "Yellow"],
-      c: 1
-    },
-    {
-      q: "How often should the barista hand wash sink be sanitized?",
-      a: ["Daily", "At the start and end of every shift", "Every 2 hours", "Weekly"],
-      c: 1
-    },
-    {
-      q: "True or False: It is acceptable to rinse a cleaning cloth in the hand wash sink.",
-      a: ["True", "False"],
-      c: 1
-    },
-    {
-      q: "What items must always be available at a designated hand wash sink?",
-      a: ["Hot water, cold water, hand soap, and paper towels", "Hot water, sanitizer spray, and a cloth", "Cold water and a clean towel", "Soap and sanitizer only"],
-      c: 0
-    },
-    {
-      q: "Which of these symptoms must be reported to the manager before starting a shift?",
-      a: ["A mild headache", "Vomiting or diarrhea within the last 48 hours", "Muscle soreness from the gym", "Slight fatigue"],
-      c: 1
-    },
-    {
-      q: "How long must a barista be free of vomiting and diarrhea symptoms before they can return to work?",
-      a: ["12 hours", "24 hours", "48 hours", "72 hours"],
-      c: 2
-    },
-    {
-      q: "What is the primary purpose of 'day dotting' prep containers?",
-      a: ["To keep track of stock levels", "To ensure food is used or discarded within its safe shelf life", "To label the price of the food", "To help with inventory audits"],
-      c: 1
-    },
-    {
-      q: "When applying a day dot to a freshly prepped container, what information must be written on it?",
-      a: ["The price and weight", "The name of the item, prep date, prep time, initials, and discard date/time", "The name of the item and supplier", "Your initials only"],
-      c: 1
-    },
-    {
-      q: "Which of the following is considered a physical hazard in food safety?",
-      a: ["Salmonella bacteria", "Traces of cleaning chemical on a cup", "A piece of broken glass or hair in a drink", "Peanut residue on a steam wand"],
-      c: 2
-    },
-    {
-      q: "Which of the following is considered a chemical hazard in food safety?",
-      a: ["A fly inside the pastry display", "Puly Caff powder residue left inside a group head", "Using dairy milk instead of oat milk", "A piece of plastic from a milk carton lid"],
-      c: 1
-    },
-    {
-      q: "What is the correct storage method for clean, sanitized cups and glasses on the bar shelves?",
-      a: ["Stored upright to catch dust", "Stored upside down on a clean surface or wire shelf", "Stacked as high as possible to save space", "Wrapped in cling film"],
-      c: 1
-    }
-  ],
-  "Week 5": [
-    {
-      q: "What is the primary way to welcome a customer when they approach the till?",
-      a: ["A polite nod", "A warm smile and a friendly verbal greeting", "Asking for their payment immediately", "Waiting for them to speak first"],
-      c: 1
-    },
-    {
-      q: "If a customer is undecided on what to order, what is the best approach?",
-      a: ["Wait silently", "Suggest a popular drink or ask what kind of flavors they usually prefer", "Tell them to step aside", "Recommend the most expensive drink immediately"],
-      c: 1
-    },
-    {
-      q: "When upselling Arwa 500ml water, what is the best verbal prompt?",
-      a: ["Do you want water?", "Would you like a refreshing Arwa 500ml water to go with your coffee today?", "We have water if you are thirsty", "You should buy water"],
-      c: 1
-    },
-    {
-      q: "What is a successful strategy to encourage customers to upgrade to a Large size?",
-      a: ["Tell them Medium is too small", "Explain that for just a small price difference, they get a significantly larger beverage", "Automatically input a Large on the screen", "Ask 'Are you sure?' when they order a Medium"],
-      c: 1
-    },
-    {
-      q: "When a customer buys a hot beverage, which of these is the most effective companion-selling suggestion?",
-      a: ["An iced beverage", "A freshly baked croissant, muffin, or cookie", "A bag of coffee beans", "A reusable cup"],
-      c: 1
-    },
-    {
-      q: "If a customer orders a Flat White, what upselling suggestion should you avoid?",
-      a: ["Offering an extra shot", "Suggesting a bakery item", "Asking if they'd like a bottle of water", "Offering alternative milks"],
-      c: 0
-    },
-    {
-      q: "What is the proper action if a customer complains that their coffee is too cold?",
-      a: ["Tell them it is the correct temperature", "Apologize immediately, discard the drink, and prepare a fresh, hot replacement", "Put the cup in the microwave", "Pour hot water into their cup"],
-      c: 1
-    },
-    {
-      q: "When handling a long queue of customers, what should the cashier do?",
-      a: ["Rush through payments without talking", "Acknowledge waiting customers with a smile/nod and say 'Thank you for your patience, I'll be right with you'", "Ignore the crowd and focus only on the screen", "Call out for someone else to deal with it"],
-      c: 1
-    },
-    {
-      q: "What does G.E.S.T. stand for in our customer service recovery framework?",
-      a: ["Greet, Empathize, Solve, Thank", "Go, Eat, Sleep, Talk", "Greet, Explain, Suggest, Terminate", "Give, Earn, Serve, Treat"],
-      c: 0
-    },
-    {
-      q: "If a discount voucher is expired, how should you communicate this to the customer?",
-      a: ["Tell them they missed the date and can't use it", "Politely explain that the voucher has expired, but offer to assist them with other active promotions", "Swipe it anyway to see if it works", "Call a manager to bypass the dates"],
-      c: 1
-    },
-    {
-      q: "Why is it important to repeat the order back to the customer before finalizing payment on the POS?",
-      a: ["To show off your memory", "To ensure absolute order accuracy and prevent waste from incorrect preparation", "To stall for time", "Because the system requires it"],
-      c: 1
-    },
-    {
-      q: "What is the correct procedure for processing a refund on the POS?",
-      a: ["Just hand cash out of the drawer", "Call a Team Leader or Store Manager to authorize and process the refund", "Delete the item and close the transaction", "Tell the customer we do not offer refunds"],
-      c: 1
-    },
-    {
-      q: "If a transaction fails but the customer's card was charged, what should you do?",
-      a: ["Tell them to contact their bank and let them leave with the items", "Politely explain the POS shows the transaction failed, call a manager to check the system, and assist", "Force them to pay cash instead", "Confiscate the card"],
-      c: 1
-    },
-    {
-      q: "When logging into the POS at the start of your shift, you must:",
-      a: ["Use your colleague's PIN if yours isn't working", "Always use your own unique login details/card and never share your password", "Ask the manager to log in for you permanently", "Keep the screen logged in all day"],
-      c: 1
-    },
-    {
-      q: "Why is cash skimming (dropping excess cash to the safe) performed mid-shift?",
-      a: ["To count how much tip you have made", "To minimize security risks by reducing the amount of cash kept in the drawer", "To check if the till is balanced", "To make space for more change"],
-      c: 1
-    },
-    {
-      q: "What should you do if you suspect a customer has handed you a counterfeit banknote?",
-      a: ["Accept it anyway to avoid conflict", "Politely decline the note, asking for another payment method, and immediately inform your manager", "Take the note and rip it up", "Call the police directly from the till"],
-      c: 1
-    },
-    {
-      q: "At the end of your shift, who is responsible for counting and locking your till drawer?",
-      a: ["The barista who takes over from you", "You and the Store Manager/Shift Supervisor together", "The kitchen porter", "The security guard"],
-      c: 1
-    },
-    {
-      q: "When scanning a digital loyalty card from a customer's phone, when should it be scanned?",
-      a: ["After the receipt prints out", "Before finalizing and taking payment", "After the customer drinks their coffee", "Only when they buy a pastry"],
-      c: 1
-    },
-    {
-      q: "What should you do if a customer asks for a customized drink that is not on the standard menu?",
-      a: ["Refuse the order", "Assess if we have the ingredients, ring it up with appropriate custom modifiers, and communicate clearly with the bar", "Make it for free on the side", "Tell them to order somewhere else"],
-      c: 1
-    },
-    {
-      q: "When a customer brings their own reusable clean cup, what discount or incentive do we offer?",
-      a: ["A free pastry", "The standard reusable cup discount applied on the POS", "A free upgrade to a Large size", "No discount is offered"],
-      c: 1
-    },
-    {
-      q: "If a customer asks for 'extra hot' milk, how do we key this on the POS?",
-      a: ["We don't; we just tell the barista verbally", "Select the 'Extra Hot' modifier button so it prints on the bar ticket", "Charge them an extra fee", "Tell them we cannot customize temperature"],
-      c: 1
-    },
-    {
-      q: "True or False: We should ask every customer if they are dining in or taking away to ensure the correct tax/packaging is applied.",
-      a: ["True", "False"],
-      c: 0
-    },
-    {
-      q: "What is the correct procedure when a customer leaves personal property (like a phone or wallet) at the table?",
-      a: ["Keep it at the till in case they return, and log it immediately in the lost-and-found book with your manager", "Take it home for safekeeping", "Leave it where it is", "Give it to the next customer who asks"],
-      c: 0
-    },
-    {
-      q: "If a customer asks for nutritional information (such as calories) for a drink, what should you do?",
-      a: ["Make up a low number", "Refer them to the nutritional information table on the menu boards or in the store guide", "Tell them we do not keep track of calories", "Suggest they look it up on the internet themselves"],
-      c: 1
-    },
-    {
-      q: "How should we handle a phone order or home-delivery order tablet alert while serving a physical customer?",
-      a: ["Focus on the tablet first", "Prioritize the physical customer in front of you, then manage the digital orders during a brief pause", "Ignore the tablet entirely", "Ask the physical customer to wait while you input the tablet order"],
-      c: 1
-    },
-    {
-      q: "If the POS system crashes completely mid-shift, what is the immediate step?",
-      a: ["Close the store", "Inform your manager immediately, and switch to offline/manual processing procedures as instructed", "Give drinks away for free", "Write receipts by hand using a calculator without reporting it"],
-      c: 1
-    },
-    {
-      q: "What should you do if a customer wants to pay with a high-denomination banknote for a very cheap item?",
-      a: ["Refuse the sale outright", "Politely check if they have a smaller note or a card first, and check your till drawer for adequate change before accepting", "Accept it and give them back any random coins", "Tell them to go buy change elsewhere"],
-      c: 1
-    },
-    {
-      q: "Why must we never leave the cash drawer open when we are not actively handling money?",
-      a: ["To keep the bills from blowing away", "To prevent unauthorized access, theft, and maintain physical security", "Because the POS system will lock up", "To save battery power"],
-      c: 1
-    },
-    {
-      q: "What is the best way to present the final receipt to a customer?",
-      a: ["Throw it on the counter", "Hand it directly to them with a polite close like 'Thank you, your drink will be ready at the pick-up point!'", "Crumple it up and throw it away unless they ask", "Leave it sticking out of the printer"],
-      c: 1
-    },
-    {
-      q: "When a customer requests an invoice with a specific tax registration number (TRN), you should:",
-      a: ["Hand-write it on a napkin", "Use the 'Tax Invoice' function on the POS to input the TRN before printing", "Tell them we cannot do that", "Give them the company's head office phone number"],
-      c: 1
-    },
-    {
-      q: "If you notice a mistake on a customer's order *after* they have paid but *before* the drink is made, what should you do?",
-      a: ["Do nothing and let them take the wrong drink", "Inform the barista on the bar immediately to correct the drink, and adjust the transaction on the POS with manager help if needed", "Wait for the customer to notice and complain", "Refund the whole order and make them stand in line again"],
-      c: 1
-    },
-    {
-      q: "When a customer asks for extra napkins or sugars, you should:",
-      a: ["Hand them a massive stack to get rid of them", "Hand them a reasonable amount politely with a smile", "Point to the condiment stand and tell them to get it themselves", "Charge them extra"],
-      c: 1
-    },
-    {
-      q: "Which of these practices contributes most to building a regular customer base?",
-      a: ["Working as fast as possible without talking", "Remembering their names and favorite drink preferences over time", "Giving them free items without permission", "Suggesting they buy merchandise every visit"],
-      c: 1
-    },
-    {
-      q: "What should you do if a customer is speaking loudly on their phone while trying to order?",
-      a: ["Shout over them to get their order", "Maintain a polite, patient posture, make eye contact, and wait for them to pause or signal their order", "Refuse to serve them until they hang up", "Skip them and serve the next customer in line"],
-      c: 1
-    },
-    {
-      q: "If a customer requests tap water, how should we handle it?",
-      a: ["Refuse and tell them they must buy bottled water", "Provide it politely in a clean cup with ice, according to local store and health policies", "Charge them the same price as bottled water", "Tell them our tap water is unsafe"],
-      c: 1
-    },
-    {
-      q: "When introducing a seasonal drink promotion, how should you explain it to the customer?",
-      a: ["'We are forced to sell this today'", "'Would you like to try our new seasonal special, the [Drink Name]? It features [brief flavor description]!'", "'It is on the menu if you want it'", "'It's expensive but good'"],
-      c: 1
-    },
-    {
-      q: "If a customer displays aggressive or highly abusive behavior toward you, what is the correct response?",
-      a: ["Argue back to defend yourself", "Remain calm, do not engage in argument, and immediately call the Store Manager or Shift Supervisor to handle the situation", "Walk out of the store", "Shout for security to throw them out immediately"],
-      c: 1
-    },
-    {
-      q: "When executing suggestive selling, how many items should you suggest at maximum?",
-      a: ["One companion item (such as a cookie with coffee) to avoid overwhelming them", "Three or four different things", "As many items as possible", "None, unless they ask"],
-      c: 0
-    },
-    {
-      q: "What is the proper way to handle a customer who wants to use two different payment methods (e.g., partial cash and partial card)?",
-      a: ["Tell them we only accept one payment method per transaction", "Process a 'Split Payment' on the POS, entering the exact cash amount first, then charging the remainder to the card", "Perform two separate transactions for the same order", "Request they go get more cash"],
-      c: 1
-    },
-    {
-      q: "True or False: If a customer asks for a receipt after the transaction has been closed, we can print a duplicate receipt from the POS history.",
-      a: ["True", "False"],
-      c: 0
-    },
-    {
-      q: "Why should you avoid touching the rim of clean cups when preparing to serve them?",
-      a: ["It can crack the cup", "It leaves fingerprints and transfers bacteria to the area where the customer drinks", "It makes the coffee go cold faster", "There is no reason to avoid this"],
-      c: 1
-    },
-    {
-      q: "How do you handle a customer who claims they were charged twice for their order?",
-      a: ["Tell them it is impossible", "Apologize for the concern, check the transaction history on the POS, and call the manager to review the receipts and banks", "Give them cash back immediately without checking", "Tell them to come back tomorrow"],
-      c: 1
-    },
-    {
-      q: "When a customer requests a tray for their drinks, you should:",
-      a: ["Provide a drink carrier tray politely and ensure the cups are balanced securely", "Point to where they are and let them grab it", "Tell them we only have them for delivery orders", "Charge them a packaging fee"],
-      c: 0
-    },
-    {
-      q: "What is the best way to handle feedback or a constructive suggestion from a customer about store layout?",
-      a: ["Ignore it", "Listen politely, thank them for their feedback, and pass it on to your Store Manager", "Argue with them about why the layout is correct", "Tell them to write an email to head office instead"],
-      c: 1
-    },
-    {
-      q: "Why must we verify the physical appearance of card payments when a signature is required?",
-      a: ["To check the design on the card", "To ensure card security standards are met and prevent unauthorized card usage", "Because the bank charges less fees", "It is just a habit"],
-      c: 1
-    },
-    {
-      q: "If a customer asks if our food products are Halal-certified, you should:",
-      a: ["Guess that they are", "Confirm based on store certification guidelines and the official Halal certificates display or store policy documentation", "Tell them we don't know", "Laugh off the question"],
-      c: 1
-    },
-    {
-      q: "When presenting change to a customer, what is the best technique?",
-      a: ["Count the notes back to them first, then place the coins in their hand (or on the counter if preferred) with the receipt", "Drop the coins and notes together rapidly", "Slide the money across the counter without saying anything", "Tell them to count it themselves"],
-      c: 0
-    },
-    {
-      q: "What is the standard greeting on our Drive-Thru headsets?",
-      a: ["'What do you want to buy today?'", "'Welcome to Costa Drive Thru, my name is [Name], how can I make your day sweeter today?'", "'Drive up to the window to order'", "'Hello, order when you are ready'"],
-      c: 1
-    },
-    {
-      q: "At the end of a transaction, what is the ideal farewell?",
-      a: ["'Bye'", "'Have a wonderful day, and thank you for choosing Costa!'", "'Next customer please'", "Silence with a wave"],
-      c: 1
-    },
-    {
-      q: "True or False: A smile can be 'heard' over a Drive-Thru headset or telephone call.",
-      a: ["True", "False"],
-      c: 0
-    }
-  ],
-  "Week 6": [
-    {
-      q: "What is the primary cause of espresso pouring unevenly from the double spouts of a group handle?",
-      a: ["An uneven tamp or unlevel coffee bed", "The machine is not level on the counter", "The water pressure is too high", "One cup is colder than the other"],
-      c: 0
-    },
-    {
-      q: "How often should the drip tray under the group heads be removed and thoroughly washed?",
-      a: ["Once a week", "Daily, during the close-down procedure", "Only when it overflows", "Every 2 hours"],
-      c: 1
-    },
-    {
-      q: "If the espresso machine's steam pressure drops significantly during a peak rush, what should you do first?",
-      a: ["Keep steaming anyway", "Pause extraction, check if the boiler pressure gauge is in the green zone, and notify maintenance if it remains low", "Pour hot water over the steam arm", "Turn off the machine immediately"],
-      c: 1
-    },
-    {
-      q: "What should you do if the grinder starts making a high-pitched, screeching noise and stops dispensing coffee?",
-      a: ["Keep pressing the button", "Turn it off immediately, close the hopper gate, check for foreign objects (like stones), and inform your manager", "Pour water into the grinder chute to clear it", "Hit the side of the grinder"],
-      c: 1
-    },
-    {
-      q: "How often should the bean hopper be removed and washed with warm, soapy water to remove coffee oil buildup?",
-      a: ["Daily", "At least once a week", "Once a month", "Only when switching bean types"],
-      c: 1
-    },
-    {
-      q: "True or False: We can use a metal scourer to clean the inside of the bean hopper.",
-      a: ["True", "False"],
-      c: 1
-    },
-    {
-      q: "If the water filter warning light on the machine starts flashing, what does this indicate?",
-      a: ["The machine is about to break", "The water filter cartridge has reached capacity and needs to be replaced by maintenance soon", "The water supply has been cut off", "The coffee beans are too damp"],
-      c: 1
-    },
-    {
-      q: "How do you clear a blocked steam wand tip during service?",
-      a: ["Use a paperclip or a designated steam wand cleaning tool to gently clear the holes, then purge", "Blow into the steam arm", "Use a knife to pry the tip off", "Leave it until the weekly deep clean"],
-      c: 0
-    },
-    {
-      q: "What is the correct way to handle coffee grounds waste (pucks) from the knock box?",
-      a: ["Empty them into the hand wash sink", "Empty them into a designated waste bin lined with a heavy-duty bag, and recycle if your store has a grounds-to-compost scheme", "Keep them in the knock box until the end of the week", "Flush them down the toilet"],
-      c: 1
-    },
-    {
-      q: "Why is it important to empty the knock box before it gets completely full?",
-      a: ["To avoid making a loud noise when knocking", "To prevent physical contamination of the bar and damage to the knock bar itself", "Because coffee grounds will lose their smell", "To keep the trash weight low"],
-      c: 1
-    },
-    {
-      q: "If you notice a water leak pooling underneath the espresso machine, what is your first action?",
-      a: ["Ignore it and put down a towel", "Locate the source if safe, switch off the machine if it is an electrical hazard, and report it immediately to your manager/maintenance", "Mop the floor and keep working", "Pour coffee grounds over the leak to absorb it"],
-      c: 1
-    },
-    {
-      q: "How should you clean the external stainless steel panels of the espresso machine?",
-      a: ["Use an abrasive metal polish and a wire brush", "Wipe down with a damp, clean microfiber cloth and dry with a soft cloth (or use approved stainless steel spray on non-food contact areas)", "Spray it with heavy-duty oven cleaner", "Wash it with a hose"],
-      c: 1
-    },
-    {
-      q: "What is the risk of leaving the espresso machine on with the water supply valve turned off?",
-      a: ["It will run out of coffee beans", "It can burn out the heating elements and severely damage the water pump", "It will make the espresso taste sweeter", "It has no risk at all"],
-      c: 1
-    },
-    {
-      q: "If a Merrychef oven displays an error code and refuses to heat up, what should you do?",
-      a: ["Keep slamming the door", "Unplug it, wait 30 seconds to reset, and if the error persists, log a maintenance call and do not use it", "Use a lighter to heat up the inside", "Try to open the side panels with a screwdriver"],
-      c: 1
-    },
-    {
-      q: "How often must the Merrychef oven filters be removed and cleaned?",
-      a: ["Daily", "Weekly", "Monthly", "Only when the machine stops working"],
-      c: 0
-    },
-    {
-      q: "What chemical is used to protect the internal chamber of the Merrychef oven after cleaning?",
-      a: ["Standard sanitizer", "Merrychef Oven Protector spray", "Bleach", "Cooking oil"],
-      c: 1
-    },
-    {
-      q: "Why must you never use metal utensils inside a Merrychef oven?",
-      a: ["It ruins the taste of the food", "It can damage the internal non-stick liners and cause dangerous microwave arcing/sparks", "It makes too much noise", "The utensils will melt"],
-      c: 1
-    },
-    {
-      q: "If the ice machine is not producing ice, what is the first basic troubleshooting step you should take?",
-      a: ["Check if the water supply is turned on and if the storage bin sensor is blocked by piled-up ice", "Pour hot water into the ice bin", "Hit the side of the machine with an ice scoop", "Unplug it and leave it off for the rest of the day"],
-      c: 0
-    },
-    {
-      q: "Why is it critical to use plastic or rubber scoops inside the ice machine bin instead of glass cups?",
-      a: ["Glass cups are too heavy", "Glass can easily chip or shatter in the ice, creating an invisible and extremely dangerous physical hazard", "Plastic scoops hold more ice", "Glass warms up the ice too quickly"],
-      c: 1
-    },
-    {
-      q: "How often should the under-counter fridge door gaskets (seals) be wiped down and checked for damage?",
-      a: ["Daily", "Weekly", "Monthly", "Every six months"],
-      c: 0
-    },
-    {
-      q: "If a fridge door does not close tightly because of a split gasket, what is the impact?",
-      a: ["Cold air escapes, the compressor overworks, and food temperatures may rise into the Danger Zone", "The fridge will make a whistling noise but remain perfectly cold", "It saves electricity", "It helps ventilate the fridge"],
-      c: 0
-    },
-    {
-      q: "What is the correct procedure for managing daily food waste recording?",
-      a: ["Throw everything away immediately and guess the amounts at the end of the week", "Log every wasted item (including expired food, burnt toasties, and spilled drinks) on the POS or waste sheet before discarding", "Only log items that cost more than 10 AED", "Hide the waste so the manager doesn't see it"],
-      c: 1
-    },
-    {
-      q: "Which of these practices is the most effective way to reduce milk waste on the bar?",
-      a: ["Underfill the cups", "Pour and steam only the exact amount of milk needed for the specific drink size using the jug lines", "Save leftover steamed milk in the jug and reheat it later", "Use water to dilute the milk"],
-      c: 1
-    },
-    {
-      q: "How does proper grind calibration reduce coffee bean waste?",
-      a: ["It prevents pulling bad espresso shots that have to be thrown away", "It makes the beans last forever", "It uses less coffee per cup than standard", "It speeds up the grinder motor"],
-      c: 0
-    },
-    {
-      q: "When logging retail/packaged merchandise waste, what must be checked on the item?",
-      a: ["The color of the packaging", "The barcode and the Best Before / Expiry Date", "The price tag only", "How heavy the item is"],
-      c: 1
-    },
-    {
-      q: "What is the holding time for freshly whipped cream inside a dispenser before it must be washed and recharged?",
-      a: ["12 hours", "24 hours", "48 hours (if kept refrigerated between uses)", "7 days"],
-      c: 2
-    },
-    {
-      q: "If the water flow from a group head is dripping or extremely slow even with no portafilter attached, what is the likely cause?",
-      a: ["The water filter is full", "The shower screen inside the group head is heavily clogged with coffee oils and needs cleaning", "The steam boiler is too hot", "The main water pump is turned off"],
-      c: 1
-    },
-    {
-      q: "What should you do with the group handles at the end of the nightly clean?",
-      a: ["Leave them locked tightly in the group heads overnight", "Store them clean and dry on the drip tray, or leave them loosely engaged in the group heads to keep gaskets in place", "Soak the entire handle (including plastic grips) in chemical water overnight", "Put them in the freezer"],
-      c: 1
-    },
-    {
-      q: "Why must we never soak the plastic/rubber handles of the portafilters in chemical cleaning solution?",
-      a: ["It makes them too shiny", "The chemical will degrade, crack, and damage the plastic/rubber material over time", "It changes the weight of the handle", "It makes them smell like coffee"],
-      c: 1
-    },
-    {
-      q: "What is the standard procedure if a water pipe under the bar bursts?",
-      a: ["Mop up the water while it keeps leaking", "Immediately locate and turn off the main water isolation valve, switch off nearby electrical equipment, and notify management", "Call the fire department", "Wrap tape around the pipe without turning off the water"],
-      c: 1
-    },
-    {
-      q: "How often should the syrup bottle pumps be dismantled and washed with hot water to prevent crystallization?",
-      a: ["Daily", "Weekly", "Monthly", "Only when they get completely stuck"],
-      c: 1
-    },
-    {
-      q: "If a delivery of milk arrives with a temperature of 10°C (50°F), what should you do?",
-      a: ["Accept it and put it in the freezer to cool down quickly", "Reject the delivery because it is in the Danger Zone and log the issue immediately", "Accept it and use it for hot drinks only", "Leave it on the counter for a few hours"],
-      c: 1
-    },
-    {
-      q: "What is the maximum stacking height for milk crates in the walk-in cold room to prevent tipping hazards?",
-      a: ["3 crates high", "5 crates high", "6 crates high", "There is no limit"],
-      c: 2
-    },
-    {
-      q: "Why must we never store food items or milk crates directly on the floor of the walk-in fridge?",
-      a: ["It makes the floor look dirty", "To prevent contamination, allow proper air circulation, and comply with food safety laws", "It makes it hard to sweep the floor", "It keeps the food too cold"],
-      c: 1
-    },
-    {
-      q: "If the automatic dishwasher / cup washer is not sanitizing properly, what should you check first?",
-      a: ["If the chemical intake tubes are empty and if the temperature gauge reaches the required wash/rinse targets", "The color of the cups", "The brand of dishwasher", "If the water is cold"],
-      c: 0
-    },
-    {
-      q: "What is the minimum rinse temperature for a commercial cup washer to ensure effective heat sanitization?",
-      a: ["50°C", "60°C", "82°C / 180°F", "100°C"],
-      c: 2
-    },
-    {
-      q: "How often should the waste water drain lines under the espresso machine be flushed with hot water and drain cleaner?",
-      a: ["Daily", "Weekly", "Monthly", "Every six months"],
-      c: 1
-    },
-    {
-      q: "What happens if coffee oils and milk residue are allowed to build up in the bar drains?",
-      a: ["The water will flow faster", "It causes foul odors, slow draining, blockages, and attracts pests like fruit flies", "It sanitizes the pipes naturally", "It has no negative effects"],
-      c: 1
-    },
-    {
-      q: "True or False: We can use the steam wand of the espresso machine to heat up water in a cup for cleaning purposes.",
-      a: ["True", "False"],
-      c: 1
-    },
-    {
-      q: "If you find a cracked cup or glass while working on the bar, what must you do with it?",
-      a: ["Use it only for takeaway drinks", "Discard it immediately in the designated glass waste bin to prevent physical injury or contamination", "Keep using it until it breaks completely", "Put tape over the crack"],
-      c: 1
-    },
-    {
-      q: "How should you safely clean up broken glass near the bar area?",
-      a: ["Pick up the pieces with your bare hands", "Use a dustpan and broom (or brush), place the broken glass in a labeled, puncture-proof container, and sanitize the area", "Vacuum it up with a domestic vacuum cleaner", "Sweep it under the counter"],
-      c: 1
-    },
-    {
-      q: "What is the correct procedure if the main power goes out in the store mid-shift?",
-      a: ["Keep serving drinks using a flashlight", "Ensure customer safety, keep fridge doors closed to maintain cold temperatures, inform your manager, and contact the utility provider", "Go home immediately", "Open all the fridges to let them air out"],
-      c: 1
-    },
-    {
-      q: "Why must the crumb tray of the panini press/toaster be emptied daily?",
-      a: ["To keep the machine light", "To prevent fire hazards from charred crumbs and eliminate food sources for pests", "To improve the toaster's electrical power", "Because the crumbs will ruin the next panini"],
-      c: 1
-    },
-    {
-      q: "When cleaning the panini press, what type of tool should be used to scrape the plates?",
-      a: ["A sharp metal knife", "The approved grill scraper or brass wire brush designed specifically for grill cleaning", "A standard steel wool sponge", "A plastic fork"],
-      c: 1
-    },
-    {
-      q: "What is the correct storage location for the store's SDS (Safety Data Sheets) binder?",
-      a: ["Locked in the Store Manager's private office where staff cannot access it", "In a clearly marked, easily accessible location near the chemical storage area for all staff to read", "In the dry food storage room", "Under the POS cash drawer"],
-      c: 1
-    },
-    {
-      q: "If a chemical gets splashed into your eyes, what is the immediate first aid step?",
-      a: ["Rub your eyes vigorously", "Flush your eyes immediately with clean, lukewarm water (using the eyewash station if available) for at least 15 minutes, and seek medical help", "Apply eye drops and wait", "Close your eyes and lie down"],
-      c: 1
-    },
-    {
-      q: "Why should you never mix different cleaning chemicals together (like bleach and ammonia)?",
-      a: ["It reduces their cleaning power", "It can cause dangerous chemical reactions that release highly toxic, lethal gases", "It ruins the mop buckets", "It changes the color of the solution"],
-      c: 1
-    },
-    {
-      q: "How often should the store's grease trap under the BOH sink be inspected and cleaned?",
-      a: ["Once a year", "According to the scheduled maintenance contract, typically monthly or quarterly", "Only when the sink backs up completely", "Every morning before opening"],
-      c: 1
-    },
-    {
-      q: "What is the purpose of the backflow preventer valve installed on the espresso machine's water line?",
-      a: ["To control the temperature of the brewing water", "To prevent dirty machine water from flowing backward into the main public drinking water supply", "To increase water pressure in the boiler", "To filter out minerals"],
-      c: 1
-    },
-    {
-      q: "At closing time, why must the espresso machine's steam wands be purged one final time after wiping them clean?",
-      a: ["To empty the boiler", "To ensure no milk residue has been sucked back inside the steam arm nozzle as it cooled down", "To warm up the bar area", "To reduce steam pressure overnight"],
-      c: 1
-    }
-  ]
-};
+[
+  {"id": 1, "q": "How long is the shelf life of an opened bag of coffee (day dot)?", "a": ["24 Hours", "48 Hours", "72 Hours", "1 Week"], "c": 1},
+  {"id": 2, "q": "What is the maximum time coffee should sit in the hopper before being managed for waste (off peak/end of day)?", "a": ["1 Hour", "2 Hours", "4 Hours", "8 Hours"], "c": 2},
+  {"id": 3, "q": "What is the shelf life of coffee in the dosing chamber?", "a": ["30 Minutes", "1 Hour", "2 Hours", "4 Hours"], "c": 1},
+  {"id": 4, "q": "When using Costa decaf pods and 3 or 4 shots are required, how many pods should be used?", "a": ["1 pod", "2 separate pods", "3 pods", "Decaf pods cannot make 3 or 4 shots"], "c": 1},
+  {"id": 5, "q": "How long should the red group handle be warmed for if using decaf from cold?", "a": ["3 seconds", "5 seconds", "10 seconds", "15 seconds"], "c": 1},
+  {"id": 6, "q": "During the 4 Steps & Extraction process, what is Step 3 called?", "a": ["Level", "Tamp", "Twist", "Wipe"], "c": 2},
+  {"id": 7, "q": "Why must coffee be extracted as soon as it is inserted into the group head?", "a": ["To save time", "Leaving it without extracting will burn the coffee", "It affects the crema colour only", "It is a health and safety requirement"], "c": 1},
+  {"id": 8, "q": "As a minimum, when should espresso cups be rinsed with hot water?", "a": ["Every hour", "After any busy trading periods", "Only at closing", "Every 30 minutes"], "c": 1},
+  {"id": 9, "q": "In the Grind Check, how much coffee should be dispensed into the group handle?", "a": ["10g", "14g", "18g", "21g"], "c": 1},
+  {"id": 10, "q": "In the Grind Check, what weight of coffee in the espresso cup is the target after a 20 second extraction?", "a": ["40g", "50g", "60g +/- 4g", "70g +/- 4g"], "c": 2},
+  {"id": 11, "q": "During grinder adjustments in the Grind Check, one notch on the grinder is equivalent to approximately how much coffee?", "a": ["5g", "10g", "14g", "20g"], "c": 1},
+  {"id": 12, "q": "Turning the grinder blades clockwise/coarse produces what result?", "a": ["Less coffee", "More coffee", "No change", "Stops the grinder"], "c": 1},
+  {"id": 13, "q": "In the Dose Check, what is the target weight of coffee on the chamber lid (Coffee should be)?", "a": ["10g +/- 0.4g", "14g +/- 0.4g", "18g +/- 0.4g", "20g +/- 0.4g"], "c": 1},
+  {"id": 14, "q": "In the Dose Check, to increase the dose because it's too light, which direction should you turn?", "a": ["Clockwise", "Anti-clockwise", "Either direction", "Do not adjust, replace the chamber"], "c": 1},
+  {"id": 15, "q": "Approximately how much does one quarter turn of the dose adjustment nut change the dose on most grinders?", "a": ["0.5g", "1g", "2g", "3g"], "c": 1},
+  {"id": 16, "q": "On the Mini Mazzer, what is the target dose for a Triple Shot?", "a": ["14g +/- 0.4g", "18g +/- 0.4g", "21g +/- 0.4g", "24g +/- 0.4g"], "c": 2},
+  {"id": 17, "q": "On grind time adjustments, an approximate change of 1 second in grind time is equivalent to what dose change?", "a": ["0.5g", "1g", "1.5g", "2g"], "c": 2},
+  {"id": 18, "q": "In the Visual Grind Checks, 'too coarse' flow is described as:", "a": ["A thin flow running very slow with dark crema", "A thick flow running fast and straight down with light brown crema", "A consistent medium flow, thicker at the handle", "No flow at all"], "c": 1},
+  {"id": 19, "q": "In the Visual Grind Checks, 'too fine' flow is described as:", "a": ["A thick flow running fast and straight down", "A consistent medium sized flow", "A thin flow running very slow or dripping, dark brown crema with inward trails", "A flow with no crema"], "c": 2},
+  {"id": 20, "q": "Before opening, what must always be completed prior to an Espresso Check?", "a": ["A visual check only", "A full Grind & Dose check", "A machine descale", "Nothing, it's the first check of the day"], "c": 1},
+  {"id": 21, "q": "In the Espresso Check, at how many seconds should the extraction be stopped?", "a": ["15 seconds", "20 seconds", "25 seconds", "30 seconds"], "c": 1},
+  {"id": 22, "q": "In the Espresso Check, what is the target weight in the espresso cup?", "a": ["30g", "45g", "60g", "80g"], "c": 2},
+  {"id": 23, "q": "If the coffee is running too fast during Espresso Check adjustments, what should you do to the tamp pressure?", "a": ["Make it lighter", "Make it harder", "No adjustment to tamp is needed", "Close the hopper permanently"], "c": 1},
+  {"id": 24, "q": "As a minimum, how often must a steam arm cleaning cloth be replaced?", "a": ["Every hour", "Every 3 hours", "Every 6 hours", "Once per shift"], "c": 1},
+  {"id": 25, "q": "Cloths for the steam arm should be stored:", "a": ["In your apron pocket", "In a metal pot only when not in use", "On the drip tray", "Draped over the machine"], "c": 1},
+  {"id": 26, "q": "On a Vintage coffee machine, what is the target weight for a Double Shot button check?", "a": ["30g", "60g", "80g", "10g"], "c": 1},
+  {"id": 27, "q": "On a Vintage coffee machine, what is the target weight for a Triple Shot button check?", "a": ["60g", "70g", "80g", "90g"], "c": 2},
+  {"id": 28, "q": "On a Vintage coffee machine, what is the target weight for a Cortissimo Shot button check?", "a": ["10g", "20g", "30g", "40g"], "c": 2},
+  {"id": 29, "q": "On a Vintage coffee machine, what is the target weight for a Corto Shot button check?", "a": ["10g", "20g", "30g", "60g"], "c": 0},
+  {"id": 30, "q": "Before checking button calibrations on a Vintage machine, what must be completed first?", "a": ["A machine descale", "A full and accurate Grind & Dose check", "A steam arm clean", "An allergen check"], "c": 1},
+  {"id": 31, "q": "Per the Coffee Shots & Decaf Extraction Guide, a Single Espresso should be:", "a": ["1 Shot, 30mls/30g – 20 Seconds", "2 Shots, 60mls/60g – 20 Seconds", "1 Shot, 20mls/20g – 15 Seconds", "1 Shot, 40mls/40g – 25 Seconds"], "c": 0},
+  {"id": 32, "q": "Per the Coffee Shots & Decaf Extraction Guide, a Double Ristretto is:", "a": ["2 Shots, 60mls/60g – 20 Seconds", "1 Shot, 20mls/20g – 15 Seconds", "2 Shots, 40mls/40g – 15 Seconds", "2 Shots, 40mls/40g – 20 Seconds"], "c": 2},
+  {"id": 33, "q": "Per the Coffee Shots & Decaf Extraction Guide, a Medium Americano requires:", "a": ["2 shots, 60mls/60g – 20 seconds", "3 shots, 80mls/80g – 35 seconds", "4 shots, 120mls/120g – 2 x 20 seconds", "2 shots, 80mls/80g – 20 seconds"], "c": 1},
+  {"id": 34, "q": "Per the Coffee Shots & Decaf Extraction Guide, a Flat White Small uses:", "a": ["Cortissimo – 3 Shots, 30mls/30g – 15 Seconds", "Corto – 2 Shots, 10mls/10g – 5 Seconds", "2 Shots, 60mls/60g – 20 Seconds", "1 Shot, 30mls/30g – 20 Seconds"], "c": 0},
+  {"id": 35, "q": "What is the standard extra shot addition for an Americano (all sizes)?", "a": ["1 x 20ml/20g", "1 x 30ml/30g", "1 x 40ml/40g", "1 x 10ml/10g"], "c": 1},
+  {"id": 36, "q": "For Milk Steaming, what is the target temperature for a 600ml jug?", "a": ["110°F / 43°C", "120°F / 49°C", "130°F / 54°C", "140°F / 60°C"], "c": 1},
+  {"id": 37, "q": "For Milk Steaming, what is the target temperature for a 1L/1.5L jug?", "a": ["120°F / 49°C", "130°F / 54°C", "140°F / 60°C", "150°F / 66°C"], "c": 2},
+  {"id": 38, "q": "For Milk Steaming, 'extra hot' for a 600ml jug is achieved by stopping the steam arm at:", "a": ["120°F / 49°C", "130°F / 54°C", "140°F / 60°C", "150°F / 66°C"], "c": 1},
+  {"id": 39, "q": "For Milk Frothing, what is the target temperature for a 600ml jug?", "a": ["110°F / 43°C", "120°F / 49°C", "130°F / 54°C", "140°F / 60°C"], "c": 1},
+  {"id": 40, "q": "For Milk Frothing, extra hot for a 1L & 1.5L jug is achieved by stopping the steam arm at:", "a": ["130°F / 54°C", "140°F / 60°C", "150°F / 66°C", "160°F / 71°C"], "c": 2},
+  {"id": 41, "q": "For Chocolate Milk Frothing, what is the standard temperature for a 600ml jug?", "a": ["120°F / 49°C", "130°F / 54°C", "140°F / 60°C", "150°F / 66°C"], "c": 1},
+  {"id": 42, "q": "For Chocolate Milk Frothing, extra hot for a 1L & 1.5L jug is:", "a": ["140°F / 60°C", "150°F / 66°C", "160°F / 71°C", "170°F / 77°C"], "c": 2},
+  {"id": 43, "q": "In Milk Texturing, how far under the surface of the milk should the steam arm be positioned to create the whirlpool effect?", "a": ["Slightly off centre, 1 cm under the surface", "Directly in the centre, 2 cm under the surface", "At the base of the jug", "On the surface, not submerged"], "c": 0},
+  {"id": 44, "q": "In Milk Texturing, how many seconds should you listen for the 'chirping' sound?", "a": ["2–4 seconds", "5–8 seconds", "10–12 seconds", "15–20 seconds"], "c": 1},
+  {"id": 45, "q": "In Milk Texturing, at what angle should the jug be tilted to create the whirlpool effect?", "a": ["20 degrees", "30 degrees", "40 degrees", "60 degrees"], "c": 2},
+  {"id": 46, "q": "How often must a milk thermometer be calibrated at a minimum?", "a": ["Once a week", "At least 3 times a week", "Once a day", "Once a month"], "c": 1},
+  {"id": 47, "q": "In milk thermometer calibration (stores with ice), what should the thermometer read?", "a": ["32°F (+/- 2°F) / 0°C (+/- 2°C)", "30°F (+/- 1°F) / -1°C (+/- 1°C)", "34°F (+/- 2°F) / 1°C (+/- 2°C)", "28°F (+/- 2°F) / -2°C (+/- 2°C)"], "c": 0},
+  {"id": 48, "q": "In milk thermometer calibration, how full should the medium latte glass be filled with cold water relative to the ice?", "a": ["To the top", "1/3rd or to the middle of the O", "Half full", "Just enough to cover the bottom"], "c": 1},
+  {"id": 49, "q": "How often must a digital probe be calibrated at a minimum?", "a": ["Daily", "Weekly", "Monthly", "3 times a week"], "c": 1},
+  {"id": 50, "q": "In digital probe calibration, the probe should give a reading of:", "a": ["-2°C to 0°C / 28°F–32°F", "-1°C and +1°C / 31°F–33°F", "0°C to 2°C / 32°F–36°F", "-3°C to -1°C / 27°F–30°F"], "c": 1},
+  {"id": 51, "q": "When cleaning milk/digital probe thermometers, what should be used?", "a": ["Any wet cloth", "Sanitiser wipes only, to clean the thermometer only", "Dish soap and water", "Alcohol spray on the clips"], "c": 1},
+  {"id": 52, "q": "What should NOT be done with milk jugs after cleaning/rinsing?", "a": ["Air dry them", "Do not discard milk down hand wash sinks or the coffee machine drip tray", "Store on the back bar", "Attach a clip and thermometer"], "c": 1},
+  {"id": 53, "q": "As a minimum, milk jugs should be fully rinsed at the back bar sink at which times?", "a": ["Every hour on the hour", "10AM-11AM, 2PM-3PM, 6PM-7PM, 10PM-11PM", "Only at opening and closing", "Every 15 minutes"], "c": 1},
+  {"id": 54, "q": "At end of day cleaning for milk jugs, what should be removed from all jugs before dishwashing?", "a": ["Nothing needs removing", "Thermometers and clips", "Only the lids", "The rubber base"], "c": 1},
+  {"id": 55, "q": "For Whipped Cream, how long should the canister be shaken?", "a": ["10 seconds", "20 seconds", "30 seconds", "45 seconds"], "c": 2},
+  {"id": 56, "q": "What is the day dot shelf life for whipping cream once the canister is filled?", "a": ["12 Hours", "24 Hours", "48 Hours", "3 Days"], "c": 1},
+  {"id": 57, "q": "What is the day dot shelf life for a cream carton once opened (as long as it doesn't exceed the use-by date)?", "a": ["24 Hours", "2 Days", "3 Days", "1 Week"], "c": 2},
+  {"id": 58, "q": "Regarding sauce/syrup pumps, what should never be done?", "a": ["Reuse the same pump for the same flavour", "Place pumps into the dishwasher", "Wipe bottles with a damp blue cloth", "Prime a new pump with 1 dose"], "c": 1},
+  {"id": 59, "q": "What can NOT be made with dairy alternatives?", "a": ["Lattes", "Milk whip / cold foam", "Cappuccinos", "Hot chocolate"], "c": 1},
+  {"id": 60, "q": "In Milk Babyccino/Hot Chocolate Babyccino preparation, what important step should NOT be done?", "a": ["Pour cold milk into the cup first", "Heat the espresso cup first", "Froth the milk to standard", "Serve with a teaspoon"], "c": 1},
+  {"id": 61, "q": "What is the standard milk quantity for a Small Flat White?", "a": ["250mls", "300mls", "350mls", "400mls"], "c": 1},
+  {"id": 62, "q": "What is the standard milk quantity for a Medium Flat White?", "a": ["250mls", "300mls", "350mls", "400mls"], "c": 2},
+  {"id": 63, "q": "How much micro-bubble foam should a Flat White have at most?", "a": ["No foam at all", "0.5cm", "1cm", "2cm"], "c": 1},
+  {"id": 64, "q": "For a Small Flat White, what coffee shot is extracted?", "a": ["Corto shot", "Cortissimo shot", "Double Ristretto", "Single Espresso"], "c": 1},
+  {"id": 65, "q": "For a Medium Flat White, what coffee shots are extracted?", "a": ["Cortissimo & Corto shot", "Two Cortissimo shots", "Double Espresso", "Triple shot"], "c": 0},
+  {"id": 66, "q": "What milk quantity is used for a Magic?", "a": ["250mls", "300mls", "350mls", "110mls"], "c": 1},
+  {"id": 67, "q": "What coffee shots make up a Magic?", "a": ["Single Espresso", "2 Ristretto (40ml)", "Double Espresso", "Cortissimo shot"], "c": 1},
+  {"id": 68, "q": "In the Magic recipe, how much milk goes into the finished cup?", "a": ["90mls", "100mls", "110mls", "150mls"], "c": 2},
+  {"id": 69, "q": "A Black Corto should have what volume and crema?", "a": ["60ml with 3mm crema", "30ml with 5mm crema", "90ml with 2mm crema", "60ml with 1mm crema"], "c": 0},
+  {"id": 70, "q": "A Black Corto is extracted using what shot volume and time?", "a": ["Double shot, 60mls in 20 seconds", "Triple Shot, 60mls in 20 seconds", "Single shot, 30mls in 15 seconds", "Triple Shot, 90mls in 30 seconds"], "c": 1},
+  {"id": 71, "q": "A Black Corto Decaf is made using:", "a": ["1 Decaf Pod, 30mls in 10 sec", "2 Decaf Pods (1x30mls in 10 sec)", "3 Decaf Pods", "Decaf is not available for Black Corto"], "c": 1},
+  {"id": 72, "q": "What should a Black Corto be served with?", "a": ["Turkish Delight", "Almond Biscotti", "Marshmallow", "Cinnamon stick"], "c": 1},
+  {"id": 73, "q": "What is the standard milk quantity for a Small Latte?", "a": ["200mls", "250mls", "300mls", "350mls"], "c": 1},
+  {"id": 74, "q": "How many coffee shots are used for a Small Latte Take Away?", "a": ["1 Shot", "2 Shots", "3 Shots", "4 Shots"], "c": 1},
+  {"id": 75, "q": "How many coffee shots are used for a Small Latte Drink In?", "a": ["1 Shot", "2 Shots", "3 Shots", "4 Shots"], "c": 0},
+  {"id": 76, "q": "How much froth should a Latte have?", "a": ["No froth", "1cm +/- 2mls", "3cm +/- 2mls", "0.5cm exactly"], "c": 1},
+  {"id": 77, "q": "What is the standard milk quantity for a Large Cappuccino?", "a": ["200mls", "250mls", "300mls", "350mls"], "c": 2},
+  {"id": 78, "q": "How many shots are used for a Medium Cappuccino?", "a": ["2 shots", "3 shots", "4 shots", "1 shot"], "c": 1},
+  {"id": 79, "q": "What is the ideal ratio breakdown for a Cappuccino?", "a": ["1/2 froth, 1/2 coffee", "1/3 froth, 1/3 frothed milk and 1/3 coffee", "All milk, coffee on top", "1/4 froth, 3/4 coffee"], "c": 1},
+  {"id": 80, "q": "For a takeaway Cappuccino, how should chocolate dusting be applied?", "a": ["Using a Costa approved stencil", "Without using a stencil", "It should not be applied for takeaway", "Only if the customer asks in writing"], "c": 1},
+  {"id": 81, "q": "What is the standard milk for an Espresso Macchiato mark?", "a": ["A large pour of steamed milk", "A small amount of freshly frothed milk to mark the top", "Condensed milk", "Whipped cream"], "c": 1},
+  {"id": 82, "q": "Single/Double Espressos/Ristrettos should have an even spread with a minimum of how much crema?", "a": ["1mm", "2mm", "3mm", "5mm"], "c": 2},
+  {"id": 83, "q": "For an Americano, how much hot water is used to fill the cup initially?", "a": ["1/3rd", "1/2", "2/3rds", "Full cup"], "c": 2},
+  {"id": 84, "q": "How many shots does a Large Americano use?", "a": ["2 Shots", "3 Shots", "4 Shots", "5 Shots"], "c": 2},
+  {"id": 85, "q": "What is the standard milk quantity for a Small Mocha?", "a": ["150mls", "200mls", "250mls", "300mls"], "c": 1},
+  {"id": 86, "q": "How many scoops of Hot Chocolate Powder go into a Medium Mocha?", "a": ["1 Scoop", "2 Scoops", "3 Scoops", "4 Scoops"], "c": 2},
+  {"id": 87, "q": "How much froth should a Mocha have?", "a": ["None", "1cm +/- 2mls", "0.5cm exactly", "3cm"], "c": 1},
+  {"id": 88, "q": "For a Mocha Corto, how much milk/alternative is added to the 600ml jug?", "a": ["100mls", "150mls", "200mls", "250mls"], "c": 1},
+  {"id": 89, "q": "How many scoops of Hot Chocolate Powder are added for a Hot Chocolate Small?", "a": ["1 Scoop", "2 Scoops", "3 Scoops", "4 Scoops"], "c": 1},
+  {"id": 90, "q": "What is the standard milk quantity for a Large Hot Chocolate?", "a": ["250mls", "300mls", "350mls", "400mls"], "c": 2},
+  {"id": 91, "q": "For White Hot Chocolate, how many pumps of white chocolate sauce go into a Medium?", "a": ["2 Pumps", "3 Pumps", "4 Pumps", "5 Pumps"], "c": 1},
+  {"id": 92, "q": "What milk quantity is used in a Small White Hot Chocolate?", "a": ["200mls", "250mls", "300mls", "350mls"], "c": 1},
+  {"id": 93, "q": "For Chai Latte, how many pumps of Chai Syrup go into a Large?", "a": ["2 Pumps", "3 Pumps", "4 Pumps", "5 Pumps"], "c": 2},
+  {"id": 94, "q": "Chai Latte can market-specifically be finished with what topping?", "a": ["Cocoa powder", "Cinnamon dust", "Nutmeg", "Chocolate shavings"], "c": 1},
+  {"id": 95, "q": "What milk quantity is used for a Milk Babyccino?", "a": ["100mls", "150mls", "200mls", "250mls"], "c": 1},
+  {"id": 96, "q": "What is added to a cup before pouring frothed milk in a Babyccino to lower its temperature?", "a": ["Ice cubes", "Cold milk/alternative", "Cold water", "Nothing is added"], "c": 1},
+  {"id": 97, "q": "What size jug is used for the Milk Babyccino base?", "a": ["250ml jug", "600ml jug", "1L jug", "1.5L jug"], "c": 1},
+  {"id": 98, "q": "In Hot Chocolate Babyccino, what topping is served if available?", "a": ["Whipped cream", "One marshmallow", "Cinnamon stick", "Cappuccino dusting only"], "c": 1},
+  {"id": 99, "q": "For Tea, how much second teabag can be added if requested?", "a": ["Never, only 1 teabag allowed", "A 2nd teabag can be added for free", "Only if the customer pays extra", "Only for Decaf tea"], "c": 1},
+  {"id": 100, "q": "Infused Tea should be filled with hot water to what level?", "a": ["1/3rd", "1/2", "2/3rds", "Full"], "c": 2},
+  {"id": 101, "q": "What temperature should the Bunn Filter Coffee Machine be leveled at?", "a": ["90 degrees", "93 degrees", "96 degrees", "100 degrees"], "c": 2},
+  {"id": 102, "q": "How many grams of coffee are needed for a half brew of Filter Coffee?", "a": ["40g / half sachet", "80g / one sachet", "120g", "160g / two sachets"], "c": 1},
+  {"id": 103, "q": "How much coffee is needed for a full brew of Filter Coffee?", "a": ["80g / one sachet", "120g", "160g / two sachets", "200g"], "c": 2},
+  {"id": 104, "q": "Before the first brew of the day, what must be done to the Bunn Filter machine server?", "a": ["Nothing special", "A half brew without coffee or filter paper to warm the server", "A full descale cycle", "Run 3 empty brew cycles"], "c": 1},
+  {"id": 105, "q": "If filter coffee remains in the server after how many hours, must it always be discarded?", "a": ["1 hour", "2 hours", "3 hours", "4 hours"], "c": 2},
+  {"id": 106, "q": "For a Small Spanish Latte, how many pumps of Condensed Milk Sauce are added?", "a": ["2 Pumps", "3 Pumps", "4 Pumps", "5 Pumps"], "c": 1},
+  {"id": 107, "q": "What shelf life does Condensed Milk Sauce carry per the recipe card?", "a": ["4 Weeks", "8 Weeks", "12 Weeks", "3 Months"], "c": 1},
+  {"id": 108, "q": "For Caramel Macchiato, what is the froth layer thickness when pouring milk?", "a": ["1cm", "2-3cm", "4-5cm", "No froth layer"], "c": 1},
+  {"id": 109, "q": "What syrup is added before the milk froth for a Caramel Macchiato, and how many pumps for a Medium?", "a": ["Caramel syrup, 3 pumps", "Vanilla Syrup, 3 Pumps", "Chai Syrup, 3 Pumps", "Hazelnut syrup, 2 pumps"], "c": 1},
+  {"id": 110, "q": "Caramel Macchiato is finished with what topping?", "a": ["Cinnamon dust", "Zigzag of Caramel sauce", "Chocolate shavings", "Whipped cream"], "c": 1},
+  {"id": 111, "q": "For Matcha Latte, how many scoops of Matcha Powder are used for a Small?", "a": ["1 Scoop", "2 Scoops", "3 Scoops", "4 Scoops"], "c": 1},
+  {"id": 112, "q": "Bon Accord No Sugar Matcha Powder has what open shelf life?", "a": ["1 month", "2 months", "3 months", "6 months"], "c": 2},
+  {"id": 113, "q": "In Turkish Coffee preparation, how many grams of ground coffee are used for a Single?", "a": ["7 gms with 1 white sugar sachet", "14 gms with 2 white sugar sachets", "10 gms with no sugar", "21 gms with 3 sachets"], "c": 0},
+  {"id": 114, "q": "In Turkish Coffee preparation, a Double uses how much ground coffee and sugar?", "a": ["7 gms, 1 sachet", "14 gms, 2 white sugar sachets", "10 gms, 1 sachet", "21 gms, 2 sachets"], "c": 1},
+  {"id": 115, "q": "What grinder is used for Turkish Coffee?", "a": ["Mini Mazzer", "Ditting 807 Grinder", "Mazzer Grinder", "Hario Grinder"], "c": 1},
+  {"id": 116, "q": "If a customer asks for 2 single Turkish coffees, how many grams of ground coffee should be used?", "a": ["7 grams", "14 grams total, placing 2 solo cups under", "21 grams", "You must make them separately, never together"], "c": 1},
+  {"id": 117, "q": "What machine is used to extract Turkish coffee?", "a": ["Bunn ICB machine", "Arzum Okka Turkish Coffee Machine", "Vintage coffee machine", "Hario jug"], "c": 1},
+  {"id": 118, "q": "What is served alongside Turkish Coffee?", "a": ["Biscotti", "Turkish Delight and a glass of cold water", "A marshmallow", "Cinnamon stick"], "c": 1},
+  {"id": 119, "q": "For CostaMISE/Syrup Dosing on a Corto for hot drinks, how many pumps are used?", "a": ["1 Pump", "2 Pumps", "3 Pumps", "4 Pumps"], "c": 0},
+  {"id": 120, "q": "For CostaMISE syrup dosing, how many pumps are used for a Large hot drink?", "a": ["2 Pumps", "3 Pumps", "4 Pumps", "5 Pumps"], "c": 2},
+  {"id": 121, "q": "For Cold Foam made with ice, what type of milk must be used?", "a": ["Whole/full fat milk", "Chilled Skimmed / 0% fat milk", "Any dairy alternative", "Semi-skimmed milk"], "c": 1},
+  {"id": 122, "q": "Where must skimmed milk be taken from every time to whip correctly for Cold Foam?", "a": ["Room temperature storage", "The fridge", "The freezer", "Pre-warmed containers"], "c": 1},
+  {"id": 123, "q": "Using the HB Milk Whipper, how long should you whip the milk for Cold Foam?", "a": ["15 seconds", "20 seconds", "30 seconds", "45 seconds"], "c": 2},
+  {"id": 124, "q": "What speed/notch setting is used on the Milk Whipper for Cold Foam?", "a": ["High – notch 3", "Low – notch 1", "Medium – notch 2", "Variable, no set notch"], "c": 1},
+  {"id": 125, "q": "In the Iced Espresso Range, how long should the shaker be shaken for?", "a": ["3 seconds", "5 seconds", "10 seconds", "15 seconds"], "c": 1},
+  {"id": 126, "q": "For Iced Americano, pre-chilled water is added to which line on the cup/glass?", "a": ["Line 1", "Line 2", "Line 3", "Line 4"], "c": 2},
+  {"id": 127, "q": "How many shots does a Large Iced Latte use?", "a": ["2 Shots", "3 Shots", "4 Shots", "1 Shot"], "c": 1},
+  {"id": 128, "q": "In Iced Cappuccino, what type of milk must the Milk Whip be made with for the standard version?", "a": ["Whole milk", "Skimmed / 0% fat Milk", "Semi-skimmed", "Oat milk"], "c": 1},
+  {"id": 129, "q": "What stencil is used for chocolate dusting on a drink-in Iced Cappuccino?", "a": ["Costa approved standard stencil", "3-Bean stencil", "No stencil is used", "Heart stencil"], "c": 1},
+  {"id": 130, "q": "In Iced Mocha, ice is added to line 2 of the shaker and shaken for how long?", "a": ["3 seconds", "5 seconds", "8 seconds", "10 seconds"], "c": 1},
+  {"id": 131, "q": "For Iced Chocolate, how many pumps of Belgian Chocolate Sauce go into a Medium?", "a": ["2 pumps", "3 pumps", "4 pumps", "5 pumps"], "c": 1},
+  {"id": 132, "q": "In the Iced Magic recipe, how much Monin Gomme syrup is added?", "a": ["No syrup", "1 pump (5ml)", "2 pumps (10ml)", "3 pumps (15ml)"], "c": 1},
+  {"id": 133, "q": "If a customer requests an Iced Magic with foam, what note is given regarding the shaker?", "a": ["Shake normally as usual", "Do NOT shake the contents if customer requests with foam", "Shake for 10 seconds instead of 5", "Shaking is not relevant to foam requests"], "c": 1},
+  {"id": 134, "q": "In Iced Magic, what coffee shot is used?", "a": ["Single Espresso", "Double Ristretto (40ml)", "Cortissimo shot", "Triple shot"], "c": 1},
+  {"id": 135, "q": "For the Peach or Lemon Classic Lemonade, how many pumps for a Medium?", "a": ["2 pumps", "3 pumps", "4 pumps", "5 pumps"], "c": 1},
+  {"id": 136, "q": "In Peach or Lemon Iced Tea (made to order), how long should tea brew using a timer?", "a": ["30 seconds", "45 seconds", "60 seconds", "90 seconds"], "c": 1},
+  {"id": 137, "q": "For the Lemon Hibiscus Iced Tea, how many pumps of Lemonade base for a Large?", "a": ["2 pumps (30mls)", "3 pumps (45mls)", "4 pumps (60mls)", "5 pumps (75mls)"], "c": 2},
+  {"id": 138, "q": "When brewing the Hibiscus Tea Base (batch brew), how many teabags are used?", "a": ["3 Hibiscus teabags", "6 Hibiscus teabags", "9 Hibiscus teabags", "12 Hibiscus teabags"], "c": 1},
+  {"id": 139, "q": "Hibiscus Tea Base should brew for how long before hot water is added to the top of the word 'Massimo'?", "a": ["1 minute", "2 minutes 30 seconds", "5 minutes", "10 minutes"], "c": 1},
+  {"id": 140, "q": "Once brewed, the Hibiscus/English Breakfast tea base jug is day dotted for how long?", "a": ["12 hours", "24 hours", "48 hours", "3 days"], "c": 1},
+  {"id": 141, "q": "When Brewing Tea Base (English Breakfast, batch brew), hot water is added to the top of which word on the shaker?", "a": ["Massimo", "Large", "Primo", "Medio"], "c": 1},
+  {"id": 142, "q": "For Mint Lemonade, how many fresh mint leaves are used for a Small?", "a": ["4", "6", "8", "10"], "c": 1},
+  {"id": 143, "q": "Mint Lemonade is blended for how long on high?", "a": ["15 seconds", "20 seconds", "30 seconds", "45 seconds"], "c": 2},
+  {"id": 144, "q": "For Peach Berry Lemonade, what is added into the shaker along with the lemonade?", "a": ["2 scoops dried peach, 1 scoop dried strawberry", "1 scoop dried peach, 2 scoops dried strawberry", "Only dried strawberry", "Fresh peach slices"], "c": 0},
+  {"id": 145, "q": "For Strawberry Lemonade Medium, how many pumps each of lemonade and strawberry are used?", "a": ["1 pump each", "1.5 pumps each", "2 pumps each", "3 pumps each"], "c": 1},
+  {"id": 146, "q": "In the Core Frappé Range, how many scoops of milkshake powder go into a Large?", "a": ["2 scoops", "3 scoops", "4 scoops", "5 scoops"], "c": 2},
+  {"id": 147, "q": "The Core Frappé Range is blended on program 1, or how many seconds on high?", "a": ["10 seconds", "15 seconds", "20 seconds", "30 seconds"], "c": 1},
+  {"id": 148, "q": "For Strawberry Crumble Frappé, how many scoops of crumble are added for a Medium?", "a": ["2 scoops", "3 scoops", "4 scoops", "5 scoops"], "c": 1},
+  {"id": 149, "q": "Matcha Frappé Large uses how many scoops of matcha powder?", "a": ["3 scoops", "4 scoops", "5 scoops", "6 scoops"], "c": 2},
+  {"id": 150, "q": "Matcha Frappé should be blended on high mode for how long?", "a": ["15 seconds", "20 seconds", "30 seconds", "45 seconds"], "c": 2},
+  {"id": 151, "q": "For Cold Brew, what type of milk can Cold Foam only be made with?", "a": ["Whole milk", "Skimmed Milk", "Oat milk", "Any dairy alternative"], "c": 1},
+  {"id": 152, "q": "In brewing Cold Brew using the Toddy method, how many litres of room-temperature filtered water are measured into the container first?", "a": ["6 litres", "9 litres", "12 litres", "3 litres"], "c": 1},
+  {"id": 153, "q": "In the Toddy Cold Brew method, how much coffee grind is added into the filter (global standard)?", "a": ["550g", "650g", "720g", "800g"], "c": 2},
+  {"id": 154, "q": "In MENA markets, how much coffee grind (in sachets/grams) is used for the Toddy Cold Brew method?", "a": ["550g / 11 sachets", "650g / 12 sachets", "720g / 14 sachets", "480g / 9 sachets"], "c": 0},
+  {"id": 155, "q": "After the Toddy filter is inserted, how much additional water is poured through the coffee?", "a": ["1 litre", "2 litres", "3 litres", "5 litres"], "c": 2},
+  {"id": 156, "q": "How many hours after starting should the Toddy cold brew filter be removed?", "a": ["12 hours", "16 hours", "20 hours", "24 hours"], "c": 2},
+  {"id": 157, "q": "Once strained into a serving jug, Toddy cold brew is day dotted with a shelf life of:", "a": ["2 days", "3 days", "5 days", "7 days"], "c": 2},
+  {"id": 158, "q": "In the Hario Jug Cold Brew method, how much filtered water is measured in total?", "a": ["500ml", "700ml", "1 litre", "1.5 litres"], "c": 2},
+  {"id": 159, "q": "In the Hario Jug method (global markets), how much coffee grind is added to the filter?", "a": ["50g", "60g", "70g", "80g"], "c": 1},
+  {"id": 160, "q": "In the Hario Jug method for MENA markets, how much coffee grind (sachet) is used?", "a": ["50g sachet", "60g sachet", "70g sachet", "80g sachet"], "c": 0},
+  {"id": 161, "q": "How much of the total water is poured into the Hario cold brew jug first (before adding the filter/coffee)?", "a": ["300ml", "500ml", "700ml", "900ml"], "c": 2},
+  {"id": 162, "q": "Costa Iced Drinks in Pet Cans come in how many sizes?", "a": ["1 size", "2 sizes (Small & Medium)", "3 sizes", "4 sizes"], "c": 1},
+  {"id": 163, "q": "What happens after the START button is pressed on the Pet Can sealing machine?", "a": ["Nothing, you must manually seal", "The can base raises and the lid seals in less than 5 seconds", "It takes 30 seconds to seal", "The machine must be reset"], "c": 1},
+  {"id": 164, "q": "What must NEVER be done to a Pet Can after it has been sealed?", "a": ["Serve with a straw", "Add a tissue", "Shake the can", "Serve immediately"], "c": 2},
+  {"id": 165, "q": "Which drinks are NOT permitted to be served in pet cans?", "a": ["Cold Brew and Lemonades", "Iced Teas and Iced Latte", "All frappes & cream topped drinks", "Iced Americano and Iced Chocolate"], "c": 2},
+  {"id": 166, "q": "For canned drink orders with multiple items in a single KOT, what must you use to mark the can?", "a": ["Write the full beverage name", "Use a sharpie pen and codes on line 3", "Use a sticker only", "No marking is needed"], "c": 1},
+  {"id": 167, "q": "What is the shelf life/scoop colour for Frappé Powder (small)?", "a": ["8 weeks / Blue scoop", "12 weeks / Coral scoop", "12 weeks / Blue scoop", "4 weeks / Coral scoop"], "c": 1},
+  {"id": 168, "q": "What is the shelf life/scoop colour for the Medium Frappé Powder scoop?", "a": ["12 weeks / Coral scoop", "12 weeks / Blue scoop", "8 weeks / Blue scoop", "4 weeks / Blue scoop"], "c": 1},
+  {"id": 169, "q": "What is the open shelf life for prepared Matcha in a squeezy bottle (kept chilled)?", "a": ["1 day", "2 days", "3 days", "1 week"], "c": 1},
+  {"id": 170, "q": "What is the open shelf life of Fruit Cooler Bases (kept chilled)?", "a": ["24 hours", "3 days", "5 days", "1 week"], "c": 2},
+  {"id": 171, "q": "What is the open shelf life of chilled water in a jug?", "a": ["12 hours", "24 hours", "48 hours", "3 days"], "c": 1},
+  {"id": 172, "q": "What is the open shelf life of a dairy alternative once the carton is opened?", "a": ["3 days", "5 days", "1 week", "2 weeks"], "c": 1},
+  {"id": 173, "q": "What is the open shelf life of Light Whip/Whipped Cream once in a canister?", "a": ["12 Hours", "24 Hours", "48 Hours", "3 Days"], "c": 1},
+  {"id": 174, "q": "What is the open shelf life of Whipping Cream once the carton/bottle is opened?", "a": ["24 Hours", "2 Days", "3 Days", "5 Days"], "c": 2},
+  {"id": 175, "q": "What is the open shelf life of Open Mocha Italia Coffee Bags?", "a": ["24 Hours", "48 Hours", "72 Hours", "1 week"], "c": 1},
+  {"id": 176, "q": "What is the open shelf life/scoop colour of Costa Instant Coffee?", "a": ["2 weeks / Clear scoop", "4 weeks / Purple scoop", "8 weeks / Purple scoop", "12 weeks / Clear scoop"], "c": 1},
+  {"id": 177, "q": "What is the open shelf life of Cinnamon Sticks?", "a": ["4 weeks", "8 weeks", "3 months", "6 months"], "c": 3},
+  {"id": 178, "q": "What is the open shelf life of Lemon/Orange Slices?", "a": ["1 week", "2 weeks", "4 weeks", "8 weeks"], "c": 2},
+  {"id": 179, "q": "What is the open shelf life of Mango Bubbles (kept chilled)?", "a": ["2 weeks / Purple scoop", "4 weeks / Clear scoop", "6 weeks / Coral scoop", "8 weeks / Blue scoop"], "c": 1},
+  {"id": 180, "q": "What is the open shelf life for Caramel/Vanilla/Hazelnut/Cinnamon Bun syrups and their pump colour?", "a": ["8 weeks / Black 4ml pump", "12 weeks / Black 4ml pump", "3 months / White 10ml pump", "12 weeks / White 10ml pump"], "c": 1},
+  {"id": 181, "q": "What is the Temperature Danger Zone where food poisoning bacteria can grow?", "a": ["0°C – 5°C", "5°C – 65°C", "10°C – 50°C", "5°C – 100°C"], "c": 1},
+  {"id": 182, "q": "Refrigerated food must be kept at what temperature or below (country variations may apply)?", "a": ["8°C", "5°C", "3°C", "10°C"], "c": 1},
+  {"id": 183, "q": "Under the 4 Hour Rule, after 4 hours, what must happen to unsold high-risk products?", "a": ["They can be sold at a discount", "They must be discarded and recorded as wastage", "They can be returned to the fridge", "They must be frozen for later use"], "c": 1},
+  {"id": 184, "q": "If a fridge is found storing high-risk food above 5°C, who must this be reported to first?", "a": ["Head office", "The Shift Leader", "The pest control provider", "The customer"], "c": 1},
+  {"id": 185, "q": "What are the steps to take before implementing the 4 Hour Rule for a broken fridge?", "a": ["Immediately discard all food", "Try to adjust temperature manually, then call a service engineer if that fails, then try moving food to another fridge at 5°C or colder", "Call the fire department", "Close the store"], "c": 1},
+  {"id": 186, "q": "What must be done when a customer notifies a team member of an allergy or intolerance (per the 5-step process)?", "a": ["Ignore it and proceed as normal", "Team member refers to the Product Nutrition and Allergy Guide, explains preparation, customer confirms order, then order is prepared", "Immediately refuse to serve the customer", "Ask the customer to leave"], "c": 1},
+  {"id": 187, "q": "Team members who have NOT completed Safe and Legal – Allergens training must:", "a": ["Serve allergy customers with extra care", "Not serve customers who suffer from an allergy or intolerance", "Wear the allergen badge as a placeholder", "Ask a colleague to double check afterward"], "c": 1},
+  {"id": 188, "q": "What is cross contamination as defined in the manual?", "a": ["Mixing two drink orders together", "Transfer of something that could cause harm (allergen, bacteria) from one surface to another", "Using the wrong cup size", "Serving the wrong flavour syrup"], "c": 1},
+  {"id": 189, "q": "Where must the Product Nutrition and Allergy Guide be kept?", "a": ["In the back office only", "As near to the till as possible", "In the manager's office", "Only accessible digitally"], "c": 1},
+  {"id": 190, "q": "Nutrition information is provided per:", "a": ["Per serving only", "Per 100g/ml and per pack/portion", "Per teaspoon", "Per litre only"], "c": 1},
+  {"id": 191, "q": "Team members who have completed allergen training but are NOT confident dealing with an allergy sufferer's order should:", "a": ["Wear the allergen badge anyway", "Not wear an allergen badge", "Ask another untrained colleague to help", "Refuse to serve any customer that day"], "c": 1},
+  {"id": 192, "q": "When should you wash your hands, according to the 'Before' list?", "a": ["After using the toilet", "Before starting work, handling food, and changing tasks at the bar", "After blowing your nose", "After touching hair or face"], "c": 1},
+  {"id": 193, "q": "Which is listed under 'After' you should wash your hands?", "a": ["Starting work", "Handling food", "Touching dogs", "Changing tasks at the bar"], "c": 2},
+  {"id": 194, "q": "What tool/item is NOT permitted for hand washing?", "a": ["Liquid unscented soap", "Paper towels/blue roll", "Nail brushes", "Hand dryer"], "c": 2},
+  {"id": 195, "q": "In the colour coding system, which colour is used for Almond dairy alternative jugs?", "a": ["Yellow", "Green", "Brown", "Blue"], "c": 2},
+  {"id": 196, "q": "In the colour coding system, which colour is used for Oat dairy alternative jugs?", "a": ["Yellow", "Green", "Brown", "White"], "c": 0},
+  {"id": 197, "q": "In the colour coding system, which colour represents Soya?", "a": ["Yellow", "Green", "Blue", "White"], "c": 1},
+  {"id": 198, "q": "In the colour coding system, which colour represents Lactose Free milk jugs?", "a": ["Blue", "Green", "White", "Brown"], "c": 2},
+  {"id": 199, "q": "Which colour chopping board is used for Vegetarian and Vegan (with PE wrap)?", "a": ["White", "Green", "Brown", "Red"], "c": 1},
+  {"id": 200, "q": "Which colour chopping board is used for Meat & Fish?", "a": ["Green", "Brown", "White", "Red"], "c": 2},
+  {"id": 201, "q": "Which colour cleaning cloth is designated for Steam Arms Only (Dairy Milk)?", "a": ["White", "Green", "Brown", "Blue"], "c": 2},
+  {"id": 202, "q": "Which colour cleaning cloth is designated for Food Contact Surfaces & Coffee Machine Surface?", "a": ["Brown", "White", "Red", "Blue"], "c": 1},
+  {"id": 203, "q": "Which colour cleaning cloth is designated for Toilets?", "a": ["White", "Blue", "Red", "Green"], "c": 2},
+  {"id": 204, "q": "Before handling any ice equipment, what must always be done first?", "a": ["Wear gloves", "Wash your hands following the Handwashing SOP", "Wipe the scoop with sanitiser", "Check the ice temperature"], "c": 1},
+  {"id": 205, "q": "Where should the blue ice scoop be stored when not in use?", "a": ["Inside the ice machine", "On the floor near the machine", "Over a clean medium sized china cup, handle pointing down", "In a drawer with other utensils"], "c": 2},
+  {"id": 206, "q": "Ice scoops must be:", "a": ["Transparent for hygiene visibility", "Coloured (any colour, but transparent scoops are not allowed)", "Made of wood only", "Disposable and replaced daily"], "c": 1},
+  {"id": 207, "q": "What must be checked during the pre-opening cleanliness and pest activity check?", "a": ["Only the till float", "Signs of pest activity in counter/bar, back of house storage, dishwasher area, and front of house", "Only the outside seating area", "Only the stockroom"], "c": 1},
+  {"id": 208, "q": "If signs of pests are detected, what must you do?", "a": ["Ignore them if business is busy", "Clear droppings, sanitise the area, dispose of affected products, and call the pest control provider immediately", "Simply note it for the next shift", "Close the store for the day"], "c": 1},
+  {"id": 209, "q": "For all pre-packaged items (e.g. sandwiches), where is allergen information found?", "a": ["Only in the back-office folder", "Printed on the packaging", "Only available by asking head office", "It is not required for pre-packaged items"], "c": 1},
+  {"id": 210, "q": "According to the manual, ignorance of allergen requirements is:", "a": ["Acceptable if unintentional", "No excuse — it is a legal requirement", "Only an issue for managers", "Only relevant in the UK"], "c": 1},
+  {"id": 211, "q": "Where must Costa Coffee approved name badges be worn for Baristas/Barista Maestros?", "a": ["On the right side of the apron", "Front left of the full-length apron in the eyelet provided", "On the collar", "On the back of the apron"], "c": 1},
+  {"id": 212, "q": "What length apron do Baristas and Barista Maestros wear?", "a": ["Half length apron", "Full-length apron", "No apron required", "Bib-only apron"], "c": 1},
+  {"id": 213, "q": "What length apron do Managers wear?", "a": ["Full-length apron", "Half length / short apron", "No apron", "Same as Baristas"], "c": 1},
+  {"id": 214, "q": "When wearing a softshell jacket over the full-length apron, what must be done with the name badge?", "a": ["Remove it", "Keep it under the apron", "Move it to the eyelet provided on the jacket so it remains visible", "Nothing changes"], "c": 2},
+  {"id": 215, "q": "Who is permitted to wear an Allergen Badge?", "a": ["All team members regardless of training", "Only those who have completed Safe and Legal – Allergens training and are confident", "Only Shift Leaders", "Only Managers"], "c": 1},
+  {"id": 216, "q": "Regarding jewellery, how many wedding rings may be worn?", "a": ["None allowed", "Only 1 plain wedding ring (no engravings or stones)", "Up to 2 rings", "Any number as long as plain"], "c": 1},
+  {"id": 217, "q": "What is the rule for earrings?", "a": ["Any style permitted", "Sleeper hoop style only, no detachable backs, max 1-2cm diameter", "Studs only, no hoops", "No earrings permitted at all"], "c": 1},
+  {"id": 218, "q": "Are bracelets and wristbands permitted?", "a": ["Yes, always", "No, unless for religious or medical alert purposes", "Only leather bracelets", "Only on the wrist not holding a tray"], "c": 1},
+  {"id": 219, "q": "What is stated about false nails and nail varnish?", "a": ["Clear varnish is allowed", "Not acceptable at any time, including clear varnish", "Allowed if short", "Allowed only for managers"], "c": 1},
+  {"id": 220, "q": "What should be done with visible cuts, sores and grazes?", "a": ["Leave them uncovered for air exposure", "Cover with a blue plaster", "Cover with a standard skin-tone plaster", "Wrap in gauze only"], "c": 1},
+  {"id": 221, "q": "Where should necklaces and religious symbols be worn?", "a": ["Visible outside the t-shirt", "Inside the t-shirt neckline, not visible", "They are not permitted at all", "Only on a lanyard"], "c": 1},
+  {"id": 222, "q": "If ill with vomiting/diarrhoea, what must a team member do before working?", "a": ["Nothing, just wash hands more", "Get clearance from the shift leader", "Wear a mask and continue working", "Take medication and proceed"], "c": 1},
+  {"id": 223, "q": "What footwear is explicitly listed as NOT sensible/not to be worn?", "a": ["Trainers", "Sandals, flip flops, open-toed/backless shoes, high heels", "Black leather shoes", "Steel toe boots"], "c": 1},
+  {"id": 224, "q": "What should decanted products such as Hot Chocolate Powder and Frappé Powder receive?", "a": ["No day dot needed if used same day", "A day dot", "A weekly inspection only", "Only a best-before date on the container"], "c": 1},
+  {"id": 225, "q": "For open syrups & sauces (Costa branded/Monin), where should the day dot be placed?", "a": ["On the pump", "On the bottle, not the pump", "On the box the bottle came in", "On the shelf label"], "c": 1},
+  {"id": 226, "q": "Costa Collect: within how many seconds should a customer arriving be greeted with a Big Smile?", "a": ["3 seconds", "5 seconds", "10 seconds", "15 seconds"], "c": 1},
+  {"id": 227, "q": "In Delivery & Packaging, what gap should be left from the top of the cup for hot drinks?", "a": ["1cm", "1.5cm", "2cm", "3cm"], "c": 2},
+  {"id": 228, "q": "What must NOT be used to seal delivery bags?", "a": ["Delivery stickers", "Staples", "A fold and stick method", "Tape"], "c": 1},
+  {"id": 229, "q": "A small delivery bag can hold a maximum of how many drinks?", "a": ["Any 2 drinks & small food orders", "Any 4 drinks", "Any 6 drinks", "Unlimited"], "c": 0},
+  {"id": 230, "q": "A large delivery bag can hold a maximum of how many drinks?", "a": ["Any 2 drinks", "Any 4 drinks", "Any 6 drinks & any food", "Any 8 drinks"], "c": 2},
+  {"id": 231, "q": "In manual handling for lifting, where should the load be relative to the body?", "a": ["As far from the body as possible for leverage", "As close to the body as possible", "Held above the head", "At arm's length"], "c": 1},
+  {"id": 232, "q": "What should begin the upward movement when lifting?", "a": ["Straightening the legs first", "Raising the head", "Pulling with the arms", "Twisting the torso"], "c": 1},
+  {"id": 233, "q": "Slips, trips and falls are the single most common cause of what at Costa?", "a": ["Customer complaints", "Injury at work", "Product waste", "Equipment failure"], "c": 1},
+  {"id": 234, "q": "What is one recommended prevention measure for slips, trips and falls?", "a": ["Removing all mats", "Correct use of the wet floor sign", "Turning off lights during cleaning", "Avoiding the use of footwear guidelines"], "c": 1},
+  {"id": 235, "q": "If glass or crockery breaks behind the counter, what should you do first?", "a": ["Sweep it up immediately with a broom", "Stop activities in and around the area", "Call the fire brigade", "Continue serving customers as normal"], "c": 1},
+  {"id": 236, "q": "When a glass breakage occurs by the ice machine/ice wells, what should be used to remove the ice?", "a": ["Bare hands", "A plastic scoop, placing ice in the sink to melt", "A metal scoop", "Leave the ice in place"], "c": 1},
+  {"id": 237, "q": "After a glass/crockery breakage is cleaned, who must inspect the affected area?", "a": ["Any available team member", "The shift runner", "Head office remotely", "No inspection is required"], "c": 1},
+  {"id": 238, "q": "All Costa Coffee stores have what smoking policy?", "a": ["Smoking allowed in designated indoor areas", "No smoking, including vaping/electronic cigarettes", "Smoking allowed for staff only", "Smoking allowed after closing hours"], "c": 1},
+  {"id": 239, "q": "What size sign must be displayed at store entrances regarding no smoking?", "a": ["No smaller than A6", "No smaller than A5", "No smaller than A4", "No smaller than A3"], "c": 1},
+  {"id": 240, "q": "Who must empty nappy/sanitary bins?", "a": ["Any team member", "The shift leader", "A professional company (where applicable) — not team members", "The cleaning contractor at night only"], "c": 2},
+  {"id": 241, "q": "In Beverage Sampling, what must the team member always wear and have visible?", "a": ["A hair net", "The allergen pin badge", "Gloves at all times", "A face mask"], "c": 1},
+  {"id": 242, "q": "Beverage sampling should be:", "a": ["Left unattended on a tray for customers", "Interactive and not left unattended", "Given only to seated customers", "Limited to one sample per store per day"], "c": 1},
+  {"id": 243, "q": "How many sample cups are placed on a tray for hot/blended sampling?", "a": ["6", "8", "10", "12"], "c": 3},
+  {"id": 244, "q": "What must NOT be placed on sample cups?", "a": ["A straw", "A lid", "A napkin", "A label"], "c": 1},
+  {"id": 245, "q": "Only how many drinks should be sampled at a time to avoid cross contamination?", "a": ["One drink at a time", "Two drinks at a time", "Three drinks at a time", "As many as needed"], "c": 0},
+  {"id": 246, "q": "What must be kept switched on overnight (coffee machine cleaning)?", "a": ["The dishwasher", "The machine/s", "The grinder", "The oven"], "c": 1},
+  {"id": 247, "q": "In Group Head Cleaning (Futura, Valina & Vintage), how many scoops of cleaning powder are put into the blank basket?", "a": ["1 scoop", "2 scoops", "3 scoops", "4 scoops"], "c": 1},
+  {"id": 248, "q": "In Group Head Cleaning (Marisa/Lisa), how long should the chemical be allowed to foam initially?", "a": ["10 seconds", "20 seconds", "30 seconds", "60 seconds"], "c": 2},
+  {"id": 249, "q": "In Group Head Cleaning (Marisa/Lisa), the cycle should be repeated until:", "a": ["5 minutes have passed", "The foam runs white", "The powder runs out", "The timer beeps 3 times"], "c": 1},
+  {"id": 250, "q": "What will happen if you put Group Handles in the dishwasher or leave them in a large tub of water overnight?", "a": ["Nothing, it's recommended practice", "It will damage the handles and impact coffee quality", "It improves cleaning results", "It's required for hygiene certification"], "c": 1},
+  {"id": 251, "q": "In Group Handle Cleaning, for a 1L jug, how many scoops of cleaning powder are used?", "a": ["1 scoop", "2 scoops", "3 scoops", "4 scoops"], "c": 1},
+  {"id": 252, "q": "In Group Handle Cleaning, for a 1.5L jug, how many scoops of cleaning powder are used?", "a": ["1 scoop", "2 scoops", "3 scoops", "4 scoops"], "c": 2},
+  {"id": 253, "q": "Group handles should soak for how long during cleaning?", "a": ["5-10 minutes", "20-30 minutes", "45-60 minutes", "2 hours"], "c": 1},
+  {"id": 254, "q": "What must NEVER be placed through the dishwasher when cleaning grinders?", "a": ["The tray", "Hoppers", "The cradle", "Blue cloths"], "c": 1},
+  {"id": 255, "q": "Why must the knockout bin be cleaned out daily?", "a": ["To save space", "Damp coffee grounds left will turn mouldy", "It's a fire hazard", "To recycle grounds faster"], "c": 1},
+  {"id": 256, "q": "In HB Milk Whipper cleaning, what should NOT be placed in the metal cup when mixing?", "a": ["Cold water", "Spoons or other utensils", "D10 sanitiser", "The agitator"], "c": 1},
+  {"id": 257, "q": "During the HB Milk Whipper end of day full clean, how long should sanitiser be allowed to mix?", "a": ["15 seconds", "30 seconds", "60 seconds", "90 seconds"], "c": 1},
+  {"id": 258, "q": "In Bunn ICB 3.0 Filter Cleaning (weekly), how many grams of Full Circle powder are added?", "a": ["3g", "6g (about a teaspoon)", "9g", "12g"], "c": 1},
+  {"id": 259, "q": "In the Bunn ICB 3.0 weekly clean, how long should the cleaning solution be left in the server?", "a": ["10 minutes", "15 minutes", "20 minutes", "30 minutes"], "c": 3},
+  {"id": 260, "q": "What must be kept switched on overnight regarding the Ice Machine?", "a": ["It should be switched off", "It should be kept switched on", "It doesn't matter", "Only during summer"], "c": 1},
+  {"id": 261, "q": "In the weekly Ice Machine clean, D10 sanitiser is left for a contact time of how long?", "a": ["15 seconds", "30 seconds", "60 seconds", "2 minutes"], "c": 1},
+  {"id": 262, "q": "What should NOT be left in the ice well overnight?", "a": ["The lid", "Ice", "The drainage tray", "Sanitiser residue"], "c": 1},
+  {"id": 263, "q": "In Ice Well weekly cleaning, how is the drain sanitised?", "a": ["Wiping only", "Pouring half a bottle of diluted D10 sanitiser", "Using bleach tablets", "Running hot water only"], "c": 1},
+  {"id": 264, "q": "In Cannister (whipped cream) Cleaning, what must be inspected before reassembly?", "a": ["Only the nozzle", "Thoroughly inspect washed canisters to make sure they are free of residues, rewash if necessary", "Only the charger holder", "Nothing, reassemble immediately"], "c": 1},
+  {"id": 265, "q": "Before reassembling the cream canister and lid, what must always be done?", "a": ["Spray with sanitiser only", "Wash your hands following the Handwashing SOP", "Check the gas bulb", "Air dry for 1 hour"], "c": 1},
+  {"id": 266, "q": "For Chopping Boards/Knives/Tongs, at minimum how often should they be cleaned/replaced (per the guideline times)?", "a": ["Every hour", "Opening, 10-11AM, 2-3PM, 6-7PM", "Only at closing", "Every 15 minutes"], "c": 1},
+  {"id": 267, "q": "What must NOT be done to blender bases?", "a": ["Spray D10 sanitiser on them", "Place through the dishwasher", "Wipe them clean", "Clean around the base"], "c": 1},
+  {"id": 268, "q": "During Merrychef Cooling Down Procedure, how long does the cooling down process usually take?", "a": ["5 minutes", "10 minutes", "20 minutes", "40 minutes"], "c": 2},
+  {"id": 269, "q": "What can be used to speed up the Merrychef cooling down process?", "a": ["Cold water spray", "Filling the metal gastro tray with ice", "Opening all doors fully", "Running the oven on high"], "c": 1},
+  {"id": 270, "q": "During Merrychef cooling down, how should the door be left?", "a": ["Fully open", "Fully closed", "Open slightly ajar (not left fully open)", "It doesn't matter"], "c": 2},
+  {"id": 271, "q": "In Merrychef Oven Cleaning, what should NOT be used to clean the oven?", "a": ["A pastry brush", "Scourers", "A blue cloth", "D2.3 Multipurpose Cleaner"], "c": 1},
+  {"id": 272, "q": "In Merrychef Oven Cleaning, cleaning chemicals should NOT be applied to which area?", "a": ["The cook plate", "The internal ceiling", "The door seal is fine to clean", "The cavity floor"], "c": 1},
+  {"id": 273, "q": "In Merrychef Oven Cleaning, for stubborn dirt/debris, how long should it be left to soak?", "a": ["5 minutes", "10 minutes", "20 minutes", "30 minutes"], "c": 1},
+  {"id": 274, "q": "What should the microwave NEVER be used for?", "a": ["Heating Costa food items", "Heating baby food/milk or unapproved customer items, or staff's own food", "Warming poached eggs", "Nothing, it can be used for anything"], "c": 1},
+  {"id": 275, "q": "In microwave weekly cleaning, how is the air intake filter screw removed?", "a": ["With a screwdriver", "With a small coin", "By hand only", "It cannot be removed"], "c": 1},
+  {"id": 276, "q": "For Storage Fridge Cleaning, what should be done before cleaning inside the fridge?", "a": ["Leave products in place", "Empty all products from the fridge first", "Only wipe visible spots", "Turn off the fridge for 24 hours"], "c": 1},
+  {"id": 277, "q": "What should NOT be cleaned regarding fridges?", "a": ["The seals", "The drip trays", "Any exposed areas at the back of the fridge", "The door and handle"], "c": 2},
+  {"id": 278, "q": "In Sink Cleaning, D10 sanitiser must be left for a contact time of:", "a": ["15 seconds", "30 seconds", "60 seconds", "2 minutes"], "c": 1},
+  {"id": 279, "q": "What should always be placed down first before café floor mopping?", "a": ["A dust sheet", "A wet floor sign", "Nothing needed", "A caution rope"], "c": 1},
+  {"id": 280, "q": "Café area floor mopping should be done in what pattern?", "a": ["Straight lines only", "Circular motion", "Figure of 8", "Random pattern"], "c": 2},
+  {"id": 281, "q": "For toilet area cleaning, what is Costa's standard number of spot checks per day?", "a": ["4", "6", "8", "10"], "c": 2},
+  {"id": 282, "q": "In toilet area cleaning, which colour mop and bucket is used?", "a": ["Blue", "Green", "Red", "Yellow"], "c": 2},
+  {"id": 283, "q": "For DT Lane Cleaning (litter picking/pressure washing), what PPE is required?", "a": ["Just gloves", "High Viz Vest/Jacket, goggles, strong gloves & enclosed shoes", "An apron only", "No PPE required outdoors"], "c": 1},
+  {"id": 284, "q": "Before litter picking or pressure washing the DT lane, what must always be done first?", "a": ["Notify head office", "Close the DT lane using barrier or cones", "Wait for a manager", "Turn off store power"], "c": 1},
+  {"id": 285, "q": "In Coffee Catcher weekly cleaning, what is placed underneath the silver grid in the drain filter unit?", "a": ["A sanitiser tablet", "A chlorine tablet (or market alternative)", "A coffee catcher sock", "A blue cloth"], "c": 1},
+  {"id": 286, "q": "For Avocado on Toast, how many grams of smashed avocado are portioned onto the toast?", "a": ["50gms", "75gms", "100gms", "150gms"], "c": 2},
+  {"id": 287, "q": "What is the shelf life of the Smashed Avocado product?", "a": ["1 day", "2 days", "3 days", "5 days"], "c": 1},
+  {"id": 288, "q": "For the Omelette, how much liquid egg is poured into the pan?", "a": ["100ml", "120ml", "150ml", "200ml"], "c": 2},
+  {"id": 289, "q": "In Omelette prep, pre-cooked toppings are portioned at what weight each?", "a": ["10g each", "20g each", "30g each", "40g each"], "c": 1},
+  {"id": 290, "q": "How much olive oil (or butter) is added to the pan for the Omelette/Scrambled Eggs?", "a": ["5ml", "10ml", "15ml", "20ml"], "c": 1},
+  {"id": 291, "q": "For Poached Egg, hot water at what temperature is used to submerge the egg?", "a": ["75°C", "80°C", "85°C", "90°C"], "c": 2},
+  {"id": 292, "q": "For a single poached egg, how long should it be left in the hot water?", "a": ["1 minute", "2 minutes", "3 minutes", "5 minutes"], "c": 1},
+  {"id": 293, "q": "For 2 poached eggs prepared together, how long should they be left in the hot water?", "a": ["2 minutes", "3 minutes", "4 minutes", "5 minutes"], "c": 1},
+  {"id": 294, "q": "If a customer requests a hard poached egg, what additional step is taken?", "a": ["Boil for an extra 5 minutes", "Place the bowl with egg & hot water in the microwave at 70% power for 1 minute 50 seconds", "Fry it separately", "Use a different supplier product"], "c": 1},
+  {"id": 295, "q": "What is emphasized about the water used for poached eggs?", "a": ["It can be reused for multiple orders", "Fresh hot water must be used for every order", "It should be cold, not hot", "Only bottled water can be used"], "c": 1},
+  {"id": 296, "q": "What is the shelf life of prepared/dressed Generic Salad?", "a": ["12 hours", "24 hours", "48 hours", "3 days"], "c": 1},
+  {"id": 297, "q": "For Serving Salad, what is the portion weight for a Small size?", "a": ["175gms", "275gms", "375gms", "475gms"], "c": 1},
+  {"id": 298, "q": "For Serving Salad, what is the portion weight for a Large size?", "a": ["375gms", "425gms", "475gms", "525gms"], "c": 2},
+  {"id": 299, "q": "For Serving Salad (Medium), what is the portion weight?", "a": ["275gms", "325gms", "375gms", "425gms"], "c": 2},
+  {"id": 300, "q": "When toasting sourdough bread for the Omelette/Scrambled Eggs deli items, how is the toast typically cut before plating?", "a": ["Left whole", "Cut diagonally", "Cut into small cubes", "Cut into strips"], "c": 1}
+]
