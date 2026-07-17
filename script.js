@@ -1,4 +1,4 @@
-const quizContainer = document.getElementById('quiz');
+const quizContainer = document.getElementById('root');
 let currentSetStart = 0;
 const setSize = 20;
 let userAnswers = []; // Store answers for the summary
