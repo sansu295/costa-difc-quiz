@@ -1,4 +1,4 @@
-[
+const quizData =[
   {"id": 1, "q": "How long is the shelf life of an opened bag of coffee (day dot)?", "a": ["24 Hours", "48 Hours", "72 Hours", "1 Week"], "c": 1},
   {"id": 2, "q": "What is the maximum time coffee should sit in the hopper before being managed for waste (off peak/end of day)?", "a": ["1 Hour", "2 Hours", "4 Hours", "8 Hours"], "c": 2},
   {"id": 3, "q": "What is the shelf life of coffee in the dosing chamber?", "a": ["30 Minutes", "1 Hour", "2 Hours", "4 Hours"], "c": 1},
@@ -300,47 +300,5 @@
   {"id": 299, "q": "For Serving Salad (Medium), what is the portion weight?", "a": ["275gms", "325gms", "375gms", "425gms"], "c": 2},
   {"id": 300, "q": "When toasting sourdough bread for the Omelette/Scrambled Eggs deli items, how is the toast typically cut before plating?", "a": ["Left whole", "Cut diagonally", "Cut into small cubes", "Cut into strips"], "c": 1}
 ]
-const allQuestions = [
-    // Replace this with your full array of 300 questions
-    { question: "What is 1 + 1?", options: ["1", "2", "3"], answer: "2" },
-    { question: "What is the color of the sky?", options: ["Blue", "Green", "Red"], answer: "Blue" },
-    // Add all the rest of your questions here...
-];
-
-let currentSetStart = 0;
-const setSize = 100;
-
-function displayCurrentSet() {
-    const currentSet = allQuestions.slice(currentSetStart, currentSetStart + setSize);
-    const container = document.getElementById("quiz-container");
-    container.innerHTML = "";
-
-    currentSet.forEach((q, index) => {
-        const questionDiv = document.createElement("div");
-        questionDiv.innerHTML = `<p>${currentSetStart + index + 1}. ${q.question}</p>`;
-        
-        q.options.forEach(option => {
-            const optionLabel = document.createElement("label");
-            optionLabel.innerHTML = `
-                <input type="radio" name="q${currentSetStart + index}" value="${option}">
-                ${option}
-            `;
-            questionDiv.appendChild(optionLabel);
-        });
-        container.appendChild(questionDiv);
-    });
-}
-
-function moveToNextSet() {
-    if (currentSetStart + setSize < allQuestions.length) {
-        currentSetStart += setSize;
-        displayCurrentSet();
-    } else {
-        alert("You have completed all questions!");
-    }
-}
-
-// Initial call to display the first set
-displayCurrentSet();
 
 
