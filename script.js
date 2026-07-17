@@ -1,46 +1,39 @@
-const quizContainer = document.getElementById('quiz');
+// Add "Submit & Load Next 20" button
+    const nextBtn = document.createElement('button');
+    nextBtn.innerText = "Submit & Load Next 20";
+    nextBtn.style.marginTop = "20px";
+    nextBtn.onclick = () => {
+        let score = 0;
+        
+        // Loop through the current set to check answers
+        currentSet.forEach((qData, index) => {
+            const actualIndex = currentSetStart + index;
+            const selected = document.querySelector(`input[name="question${actualIndex}"]:checked`);
+            const questionDiv = document.querySelectorAll('#quiz > div')[index];
+            
+            if (selected) {
+                if (selected.value === qData.correct) {
+                    // Answer is correct
+                    questionDiv.style.border = "2px solid green";
+                } else {
+                    // Answer is wrong
+                    questionDiv.style.border = "2px solid red";
+                    const feedback = document.createElement('p');
+                    feedback.innerHTML = `<strong>Correct answer: ${qData.correct}</strong>`;
+                    questionDiv.appendChild(feedback);
+                }
+            } else {
+                // No answer selected
+                questionDiv.style.border = "2px solid orange";
+            }
+        });
 
-let currentQuiz = 0;
-
-function loadQuiz() {
-    quizContainer.innerHTML = ''; // Clear container
-
-    if (typeof quizData === 'undefined' || currentQuiz >= quizData.length) {
-        quizContainer.innerHTML = `<h2>Quiz Finished!</h2>`;
-        return;
-    }
-
-    const currentQuizData = quizData[currentQuiz];
-
-    // Add question
-    const questionH2 = document.createElement('h2');
-    questionH2.innerText = currentQuizData.q;
-    quizContainer.appendChild(questionH2);
-
-    // Add options
-    currentQuizData.a.forEach((option) => {
-        const label = document.createElement('label');
-        label.innerHTML = `<input type="radio" name="answer" value="${option}"> ${option} <br>`;
-        quizContainer.appendChild(label);
-    });
-
-    // Add submit button
-    const button = document.createElement('button');
-    button.innerText = "Submit";
-    button.onclick = submitAnswer;
-    quizContainer.appendChild(button);
-}
-
-function submitAnswer() {
-    const selected = document.querySelector('input[name="answer"]:checked');
-    if (!selected) {
-        alert("Please select an answer!");
-        return;
-    }
-    
-    // Logic to check answer could be added here later
-    currentQuiz++;
-    loadQuiz();
-}
-
-loadQuiz();
+        // Add a "Continue" button to move to the next set
+        nextBtn.innerText = "Continue to Next Set";
+        nextBtn.onclick = () => {
+            currentSetStart += setSize;
+            loadQuizSet();
+            window.scrollTo(0, 0);
+        };
+    };
+    quizContainer.appendChild(nextBtn);
