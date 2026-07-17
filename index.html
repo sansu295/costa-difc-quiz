@@ -17,6 +17,16 @@
         </ul>
         <button id="submit">Submit Answer</button>
     </div>
+    <pre id="error-log" style="color: red;"></pre>
+<script>
+    window.onerror = function(message, source, lineno, colno, error) {
+        var log = document.getElementById('error-log');
+        log.innerHTML += 'Error: ' + message + ' at ' + lineno + ':' + colno + '<br>';
+        return false;
+    };
+</script>
+
     <script src="script.js"></script>
 </body>
 </html>
+
