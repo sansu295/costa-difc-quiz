@@ -1,2 +1,32 @@
-body { background-color: #f4f4f4; display: flex; justify-content: center; align-items: center; height: 100vh; }
-.quiz-container { background-color: #fff; padding: 20px; border-radius: 10px; width: 400px; text-align: center; }
+/* style.css */
+body {
+    background-color: #f4f4f9; /* Light grey-blue background */
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.quiz-container {
+    background-color: white; /* White box for the quiz */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-width: 600px;
+    width: 100%;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
