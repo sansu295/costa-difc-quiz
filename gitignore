@@ -1,0 +1,6 @@
+# Contains the real invite code(s) - never commit this file.
+config.js
+
+# Common editor/OS junk
+.DS_Store
+node_modules/
