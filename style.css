@@ -1,0 +1,60 @@
+.quiz-container {
+    background-color: #fdfaf6;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    max-width: 500px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.instruction {
+    background-color: #f8d7da;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #7b2c31; /* Deep red color */
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.error-message {
+    color: #7b2c31;
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 6px;
+    margin: -10px 0 15px 0;
+    text-align: left;
+}
+
+.quiz-screen {
+    text-align: left;
+    max-width: 650px;
+}
+
+.progress {
+    font-size: 0.9em;
+    color: #7b2c31;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.quiz-screen label {
+    padding: 8px 0;
+}
